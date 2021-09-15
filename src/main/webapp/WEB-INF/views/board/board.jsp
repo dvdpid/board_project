@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<p>±ê Å×½ºÆ®¿ë</p>
 	<c:import url="../common/header.jsp"></c:import>
 	<c:import url="../nav/nav.jsp"></c:import>
 	<c:import url="../common/footer.jsp"></c:import>
