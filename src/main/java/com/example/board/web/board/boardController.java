@@ -1,9 +1,13 @@
 package com.example.board.web.board;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.RequestScope;
+
+import com.example.board.servive.Board.BoardService;
+import com.example.board.web.board.dto.BoardDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,8 +16,15 @@ import lombok.RequiredArgsConstructor;
 
 public class boardController {
 	
+	private final BoardService boardService;
+	
 	@RequestMapping("/")
-	public String Test() {
+	public String Test(Model model) {
+		List<BoardDto> boardList = boardService.getBoardList();
+		
+		model.addAttribute("boardList", boardList);
+		
 		return "/board/board";
+		
 	}
 }

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	테스트로 해보는 <hr>
-	<hr>
+	<input type="button" value="로그인">
+	<input type="button" value="회원가입">
 </body>
 </html>
