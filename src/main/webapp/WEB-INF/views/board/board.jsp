@@ -12,6 +12,7 @@
 	<c:import url="../nav/nav.jsp"></c:import>
 	
 	<div class="main">
+	<p> git test ¿ë </p>
 		<table border="1">
 			<thead>
 				<tr>
