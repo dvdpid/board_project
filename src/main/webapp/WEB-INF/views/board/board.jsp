@@ -18,29 +18,16 @@
 					<th>번호</th>
 					<th>제목</th>
 					<th>내용</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
 				</tr>			
 			</thead>
 			<tbody>
+			<c:forEach var="b" items="${bList }">
 				<tr>
-					<td>1</td>
-					<td>제목1</td>
-					<td>내용1</td>
-					<td>작성자1</td>
-					<td>2022-09-15</td>
-					<td>1</td>
+					<td>${b.BOARD_NO}</td>
+					<td>${b.BOARD_TITLE}</td>
+					<td>${b.BOARD_CONTENTS}</td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>제목2</td>
-					<td>내용2</td>
-					<td>작성자2</td>
-					<td>2022-09-25</td>
-					<td>2</td>
-				</tr>
-				
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>

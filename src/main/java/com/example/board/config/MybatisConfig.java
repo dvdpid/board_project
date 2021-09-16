@@ -10,15 +10,16 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
 public class MybatisConfig {
-    @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+	   @Bean  //mybatis 이용을 위한 bean 등록
+	   public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+	      SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+	      sessionFactory.setDataSource(dataSource);
+	      sessionFactory.setTypeAliasesPackage("com.example.board.web.board.dto");
+	      
+	      Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml");
+	      sessionFactory.setMapperLocations(res);
+	      
+	      return sessionFactory.getObject();
 
-        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
-
-        Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml");
-        sessionFactory.setMapperLocations(res);
-
-        return sessionFactory.getObject();
     }
 }

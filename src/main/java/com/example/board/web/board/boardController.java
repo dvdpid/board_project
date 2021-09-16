@@ -14,17 +14,16 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 
-public class boardController {
+public class BoardController {
 	
 	private final BoardService boardService;
 	
+	
 	@RequestMapping("/")
 	public String Test(Model model) {
-		List<BoardDto> boardList = boardService.getBoardList();
 		
-		model.addAttribute("boardList", boardList);
-		
+		List<BoardDto> bList = boardService.getBoardList();
+		model.addAttribute("bList", bList);
 		return "/board/board";
-		
 	}
 }

@@ -1,32 +1,32 @@
 package com.example.board.web.board.dto;
 
-import java.sql.Date;
 
-import lombok.Getter;
+import org.apache.ibatis.type.Alias;
+
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+
+@Data
 @RequiredArgsConstructor
 @ToString
-
+@Alias("Board")
 public class BoardDto {
 	
 	// 게시글 번호
-	private long bNo;
+	private int BOARD_NO ;
 	// 게시글 제목
-	private String bTitle;
+	private String BOARD_TITLE;
 	// 게시글 내용
-	private String bContents;
-	// 게시글 작성자
-	private String bWriter;
-	// 게시글 작성일
-	private Date bCreateDate;
-	// 게시글 수정일
-	private Date bModifyDate;
-	// 게시글 상태
-	private String bStatus;
+	private String BOARD_CONTENTS;
+//	// 게시글 작성자
+//	private String BOARD_WRITER;
+//	// 게시글 작성일
+//	private Date CREATE_DATE;
+//	// 게시글 수정일
+//	private Date MODIFY_DATE;
+//	// 게시글 상태
+//	private String BOARD_STATUS;
 	
 }
