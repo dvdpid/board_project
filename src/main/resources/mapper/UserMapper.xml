@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.user.mapper.UserMapper">
+		<insert id="signUpUser" parameterType="com.example.board.user.dto.UserInfoDto">
+		INSERT INTO
+		USERINFO(USER_ID, USER_PWD, USER_NICKNAME, USER_PHONE)
+		VALUES( #{USER_ID}, #{USER_PWD}, #{USER_NICKNAME}, #{USER_PHONE})
+	</insert>
+</mapper>

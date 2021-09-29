@@ -1,4 +1,4 @@
-package com.example.board.web.comment.dto;
+package com.example.board.comment.dto;
 
 import java.sql.Date;
 

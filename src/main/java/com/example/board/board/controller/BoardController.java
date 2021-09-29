@@ -1,4 +1,4 @@
-package com.example.board.web.board;
+package com.example.board.board.controller;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.board.servive.Board.BoardService;
-import com.example.board.web.board.dto.BoardDto;
+import com.example.board.board.dto.BoardDto;
+import com.example.board.board.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
 

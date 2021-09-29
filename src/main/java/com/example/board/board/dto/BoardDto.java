@@ -1,4 +1,4 @@
-package com.example.board.web.board.dto;
+package com.example.board.board.dto;
 
 
 import java.sql.Date;

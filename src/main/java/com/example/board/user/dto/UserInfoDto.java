@@ -1,4 +1,4 @@
-package com.example.board.web.user.dto;
+package com.example.board.user.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @RequiredArgsConstructor
 @ToString
-public class UserInfo {
+public class UserInfoDto {
 	
 	// 유저 번호 (PK)
 	private int USER_NO;
