@@ -35,5 +35,7 @@ public class BoardDto {
 	private String BOARD_SIGN;
 	// 비회원 비밀번호
 	private String BOARD_PWD;
+	// 유저 번호
+	private int USER_NO;
 	
 }

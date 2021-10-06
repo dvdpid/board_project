@@ -1,5 +1,7 @@
 package com.example.board.user.dto;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,7 +22,13 @@ public class UserInfoDto {
 	// 유저 닉네임 (필수)
 	private String USER_NICKNAME;
 	// 유저 핸드폰
-	private int USER_PHONE;
+	private String USER_PHONE;
+	// 가입일
+	private Date USER_DATE;
+	// 탈퇴 Y/N
+	private String DELETE_YN;
+	// 탈퇴일
+	private Date DELETE_DATE;
 	
 	
 }

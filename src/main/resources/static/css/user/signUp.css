@@ -57,6 +57,21 @@ span.ok2 {
 span.error2 {
 	color: red;
 }
+span.guide3 {
+	display: none;
+	font-size: 12px;
+	top: 12px;
+	right: 10px;
+	margin: 9px 0 -2px;
+}
+
+span.ok3 {
+	color: green;
+}
+
+span.error3 {
+	color: red;
+}
 
 #joinMemberTable {
 	margin-left: 120px;

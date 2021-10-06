@@ -19,7 +19,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()		//cors방지
                 .csrf().disable()		//csrf방지
                 .formLogin().disable()	//기본 로그인 페이지 없애기
-                .headers().frameOptions().disable();	
+                .headers().frameOptions().disable()
+               .and()
+		        .logout()
+		        .logoutUrl("/doLogout") // 로그아웃 주소
+		        .deleteCookies("JESSIONID") // 쿠키 삭제
+		        .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
+		        .invalidateHttpSession(true);// 로그아웃 이후 세션 전체 삭제 여부
     }
     @Bean
     public PasswordEncoder passwordEncoder(){

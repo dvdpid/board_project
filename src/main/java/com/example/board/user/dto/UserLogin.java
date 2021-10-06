@@ -15,4 +15,6 @@ public class UserLogin {
 	private String USER_ID;
 	// 비밀번호
 	private String USER_PWD;
+	
+	
 }

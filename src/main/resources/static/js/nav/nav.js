@@ -4,12 +4,18 @@ let main = () => {
 	$("#login").on("click", function() {
 		location.href="/user/loginPage.do"
 	});
-	$("#siginUp").on("click", function() {
+	// 회원 가입 버튼
+	$("#signUp").on("click", function() {
 		location.href="/user/signUpPage.do"
 	});
+	// 로고 클릭시 메인화면 이동
 	$("#logo").on("click", function() {
 		location.href="/"
 	});
+//	// 로그아웃 버튼
+//	$("#logout").on("click", function() {
+//		location.href="/user/logout.do"
+//	});
 }
 
 main();
