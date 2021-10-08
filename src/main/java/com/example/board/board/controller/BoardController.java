@@ -3,6 +3,11 @@ package com.example.board.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +22,12 @@ import com.example.board.board.dto.BoardDto;
 import com.example.board.board.service.BoardService;
 import com.example.board.common.Pagination;
 import com.example.board.common.dto.PageInfo;
+import com.example.board.user.dto.UserInfoDto;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @SessionAttributes("loginUser")
 @RequiredArgsConstructor
@@ -26,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	
 	private final BoardService boardService;
-	
+	private final HttpSession session;
 	// 게시판 리스트
 	@RequestMapping("/")
 	public String boardList(Model model, @RequestParam(value="page", required = false) Integer page) {
@@ -39,9 +48,11 @@ public class BoardController {
 		// 전체 게시물 개수
 		int listCount = boardService.getListCount();
 		
+		// 페이징 정보
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		List<BoardDto> bList = boardService.getBoardList(pi);
+		
 		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pi", pi);
@@ -62,6 +73,8 @@ public class BoardController {
 		
 		int result = boardService.insertBoard(b);
 		
+		log.info("log test");
+		
 		
 		return result;
 		
@@ -72,8 +85,17 @@ public class BoardController {
 							 @RequestParam("BOARD_NO") int bNo,
 								Model m ) {
 		BoardDto bDetail = boardService.boardSelect(bNo);
-		boardService.boardCount(bNo);
 		
+		
+		// 조회수 증가
+		try {
+			if(bDetail.getUSER_NO() != ((UserInfoDto)session.getAttribute("loginUser")).getUSER_NO()) {
+				boardService.boardCount(bNo);
+			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+//			e.printStackTrace();
+		}
 		
 		m.addAttribute("page", page).addAttribute("bDetail", bDetail);
 		
@@ -101,6 +123,7 @@ public class BoardController {
 		int result = boardService.updateBoard(b);
 		m.addAttribute("page", page);
 		return result;
+		
 	}
 	// 게시글 삭제
 	@PostMapping("/deleteBoard.bo")
@@ -110,8 +133,6 @@ public class BoardController {
 		int result = boardService.deleteBoard(b);
 		
 		return result;
+		
 	}
-	
-	
-	
 }

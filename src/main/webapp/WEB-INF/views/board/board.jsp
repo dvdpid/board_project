@@ -24,15 +24,15 @@
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th id="th_title" width="500px;">&nbsp; 제목</th>
+					<th style="width: 500px;">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>			
 			</thead>
 			<tbody>
-			<c:forEach var="b" items="${bList }">
-				<tr class="bDetail" onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO} + '&page=' + ${ pi.currentPage }">
+			<c:forEach var="b" items="${bList}">
+				<tr class="bDetail" onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO} + '&page=' + ${pi.currentPage}">
 					<td>${b.BOARD_NO}</td>
 					<td id="td_title" nowrap="nowrap">${b.BOARD_TITLE}</td>
 					<td>${b.BOARD_WRITER}</td>

@@ -2,15 +2,16 @@ package com.example.board.user.dto;
 
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @ToString
+@Alias("userInfo")
 public class UserInfoDto {
 	
 	// 유저 번호 (PK)

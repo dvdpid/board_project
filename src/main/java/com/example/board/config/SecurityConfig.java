@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        .logout()
 		        .logoutUrl("/doLogout") // 로그아웃 주소
 		        .deleteCookies("JESSIONID") // 쿠키 삭제
-		        .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
+		        .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소 (게시글 리스트 화면)
 		        .invalidateHttpSession(true);// 로그아웃 이후 세션 전체 삭제 여부
     }
     @Bean

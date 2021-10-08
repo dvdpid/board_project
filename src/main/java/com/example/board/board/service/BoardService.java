@@ -29,7 +29,9 @@ public class BoardService {
 	
 	public List<BoardDto> getBoardList(PageInfo pi) {
 		
+		// 어디서부터 가져올지 계산
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		// offset 부터 몇개씩 가져올건지
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return boardMapper.getBoardList(rowBounds);
@@ -37,7 +39,7 @@ public class BoardService {
 
 	public int insertBoard(BoardDto b) {
 		
-		// 세션에 있는 닉네임 가져오기
+		// 세션에 있는 유저 번호
 		int uNo = ((UserInfoDto)session.getAttribute("loginUser")).getUSER_NO();
 		b.setUSER_NO(uNo);
 		

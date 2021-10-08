@@ -2,14 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.board.user.mapper.UserMapper">
 	<!-- 회원가입 -->
-	<insert id="signUpUser" parameterType="com.example.board.user.dto.UserInfoDto">
-		INSERT INTO
-		USERINFO(USER_ID, USER_PWD, USER_NICKNAME, USER_PHONE, USER_DATE)
-		VALUES( #{USER_ID}, #{USER_PWD}, #{USER_NICKNAME}, #{USER_PHONE}, now())
+	<insert id="signUpUser" parameterType="userInfo">
+		INSERT INTO	USERINFO
+		(
+			USER_ID, 
+			USER_PWD, 
+			USER_NICKNAME, 
+			USER_PHONE, 
+			USER_DATE
+		)VALUES(
+		 	#{USER_ID}, 
+		 	#{USER_PWD}, 
+		 	#{USER_NICKNAME}, 
+		 	#{USER_PHONE}, 
+		 	now()
+		 )
 	</insert>
 	
 	<!-- 로그인 ID -->
-	<select id="userId" parameterType="com.example.board.user.dto.UserLogin" resultType="com.example.board.user.dto.UserInfoDto">
+	<select id="userId" parameterType="userLogin" resultType="userInfo">
 		SELECT *
 		FROM USERINFO
 		WHERE USER_ID = #{USER_ID} AND DELETE_YN = 'N'
@@ -17,7 +28,7 @@
 	
 	<!-- 아이디 충복 체크 -->
 	<select id="checkId" resultType="_int">
-		SELECT count(*)
+		SELECT COUNT(*)
 		FROM USERINFO
 		WHERE USER_ID = #{id}
 	</select>

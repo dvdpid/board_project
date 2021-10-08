@@ -17,32 +17,53 @@
 	</select>
 	
 	<insert id="insertBoard">
-		INSERT INTO BOARD(BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_NO)
-		VALUES(#{BOARD_TITLE}, #{BOARD_CONTENTS}, now(), #{USER_NO})
+		INSERT INTO BOARD
+		(
+			BOARD_TITLE,
+			BOARD_CONTENTS, 
+			BOARD_DATE, USER_NO
+		)VALUES(
+			#{BOARD_TITLE}, 
+			#{BOARD_CONTENTS}, 
+			now(), 
+			#{USER_NO}
+		)
 	</insert>
 	
 	<select id="boardSelect" resultType="Board">
-		SELECT *
-		FROM BOARD
+		SELECT b.*, u.USER_NICKNAME as BOARD_WRITER
+		FROM BOARD b
+		left outer join userinfo u ON(b.USER_NO = u.USER_NO)
 		WHERE BOARD_NO = #{BOARD_NO}
 	</select>
 	
 	<update id="updateBoard">
-		UPDATE BOARD
-		SET BOARD_TITLE = #{BOARD_TITLE}, BOARD_CONTENTS = #{BOARD_CONTENTS}, BOARD_DATE = NOW()
-		WHERE BOARD_NO = #{BOARD_NO}
+		UPDATE
+			BOARD
+		SET
+			BOARD_TITLE = #{BOARD_TITLE}
+			, BOARD_CONTENTS = #{BOARD_CONTENTS}
+			, BOARD_DATE = NOW()
+		WHERE 
+			BOARD_NO = #{BOARD_NO}
 	</update>
 	
 	<update id="boardCount">
-		UPDATE BOARD
-		SET BOARD_COUNT = BOARD_COUNT + 1
-		WHERE BOARD_NO = #{BOARD_NO}
+		UPDATE
+			BOARD
+		SET 
+			BOARD_COUNT = BOARD_COUNT + 1
+		WHERE 
+			BOARD_NO = #{BOARD_NO}
 	</update>
 	
 	<update id="deleteBoard">
-		UPDATE BOARD
-		SET DELETE_YN = 'Y', DELETE_DATE = NOW()
-		WHERE BOARD_NO = #{BOARD_NO}
+		UPDATE 
+			BOARD
+		SET 
+			DELETE_YN = 'Y', DELETE_DATE = NOW()
+		WHERE 
+			BOARD_NO = #{BOARD_NO}
 	</update>
 	
 	

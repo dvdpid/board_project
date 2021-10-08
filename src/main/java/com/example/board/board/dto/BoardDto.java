@@ -14,7 +14,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @ToString
 @Alias("Board")
 public class BoardDto {

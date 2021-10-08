@@ -24,7 +24,7 @@
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글보기</th>						
+						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시글</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -42,7 +42,7 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" style="min-height: 200px; text-align: left;">${bDetail.BOARD_CONTENTS }</td>
+						<td colspan="2" style="min-height: 400px; text-align: left; white-space: pre; "><c:out value="${bDetail.BOARD_CONTENTS }" /></td>
 					</tr>
 				</tbody>
 			</table>

@@ -5,7 +5,7 @@ let main = () =>{
 		location.href="/"
 	})
 	
-	
+	// 로그인 버튼 클릭시
 	$("#loginBtn").on("click", function() {
 		
 		const params = new URLSearchParams();

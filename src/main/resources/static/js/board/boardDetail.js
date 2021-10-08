@@ -14,7 +14,6 @@ $("#boardDelete").on("click", function() {
 	if(confirm("정말로 삭제하시겠습니까?")){
 		
 		let bNo = $("#boardNo").val();
-		
 		const params = new URLSearchParams();
 		
 		params.append("BOARD_NO", bNo);

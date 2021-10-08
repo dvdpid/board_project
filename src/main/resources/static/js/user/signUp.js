@@ -51,6 +51,7 @@ let main = () => {
 		axios.post("/user/signUp.do", params)
 			.then( res => {
 				if(res.data > 0){
+					alert("회원가입에 성공하셨습니다. \n로그인페이지로 이동합니다.");
 					document.location.href="/user/loginPage.do";
 				} else{
 					alert("다시 시도해주세요.");

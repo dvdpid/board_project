@@ -1,5 +1,7 @@
 package com.example.board.user.dto;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Alias("userLogin")
 public class UserLogin {
 	
 	// 아이디

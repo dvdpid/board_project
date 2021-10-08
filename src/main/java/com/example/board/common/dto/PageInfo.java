@@ -15,6 +15,7 @@ public class PageInfo {
 		private int currentPage;
 		// 게시글 갯수
 		private int listCount;
+		// 페이지 리미트
 		private int pageLimit;
 		// 최대 페이지
 		private int maxPage;
@@ -22,6 +23,7 @@ public class PageInfo {
 		private int startPage;
 		// 끝 페이지
 		private int endPage;
+		// 게시글 몇개까지 보일지 갯수
 		private int boardLimit;
 		
 		public PageInfo(int currentPage, int listCount, int pageLimit, int maxPage, int startPage, int endPage,
