@@ -13,7 +13,7 @@
 <body>
 	<div class="tab">
 		<span class="image">
-			<img id="logo" src="images/logo.png">
+			<img id="logo" src="images/logo.png" style='cursor:pointer'>
 		</span>
 		<nav>
 		<c:if test="${ empty loginUser}">

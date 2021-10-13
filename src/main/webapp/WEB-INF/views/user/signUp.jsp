@@ -14,13 +14,13 @@
 </head>
 <body>
 	<div class="joinArea" align="center">
-			<img id="logo" src="/images/logo.png">
+			<img id="logo" src="/images/logo.png" style='cursor:pointer'>
 			<h2>회원가입</h2>
 			<table id="joinMemberTable">
 				<tr>
 					<th><label class="must">*</label> 아이디</th>
 					<td width="200px">
-						<input type="text" id="userId" name="USER_ID" placeholder="아이디(4글자 이상)" style="width: 100%;">
+						<input type="text" id="userId" name="USER_ID" maxlength="10" placeholder="아이디(4글자 이상 10글자 이하)" style="width: 100%;">
 					</td>
 					<td width="200px">
 							<span class="guide ok">사용 가능합니다.</span>
@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<th><label class="must">*</label> 닉네임</th>
-					<td><input type="text" id="nickname" name="USER_NICKNAME" placeholder="닉네임(2글자 이상)" style="width: 100%;"></td>
+					<td><input type="text" id="nickname" name="USER_NICKNAME" maxlength="10" placeholder="닉네임(2글자 이상 10글자 이하)" style="width: 100%;"></td>
 					<td width="200px">
 							<span class="guide2 ok2">사용 가능합니다.</span>
 							<span class="guide2 error2">사용 불가능합니다.</span>

@@ -2,69 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.board.board.mapper.BoardMapper">
 
-	
-	<select id="getBoardList" resultType="Board">
-		select b.*, u.USER_NICKNAME as BOARD_WRITER
-		from board b 
-		left outer join userinfo u ON(b.USER_NO = u.USER_NO)
-		where b.DELETE_YN = 'n'
-		order by BOARD_NO desc;
-	</select>
-	
-	<select id="getListCount" resultType="_int">
-		select count(*)
-		from board
-	</select>
-	
-	<insert id="insertBoard">
-		INSERT INTO BOARD
-		(
-			BOARD_TITLE,
-			BOARD_CONTENTS, 
-			BOARD_DATE, USER_NO
-		)VALUES(
-			#{BOARD_TITLE}, 
-			#{BOARD_CONTENTS}, 
-			now(), 
-			#{USER_NO}
-		)
-	</insert>
-	
-	<select id="boardSelect" resultType="Board">
-		SELECT b.*, u.USER_NICKNAME as BOARD_WRITER
-		FROM BOARD b
-		left outer join userinfo u ON(b.USER_NO = u.USER_NO)
-		WHERE BOARD_NO = #{BOARD_NO}
-	</select>
-	
-	<update id="updateBoard">
-		UPDATE
-			BOARD
-		SET
-			BOARD_TITLE = #{BOARD_TITLE}
-			, BOARD_CONTENTS = #{BOARD_CONTENTS}
-			, BOARD_DATE = NOW()
-		WHERE 
-			BOARD_NO = #{BOARD_NO}
-	</update>
-	
-	<update id="boardCount">
-		UPDATE
-			BOARD
-		SET 
-			BOARD_COUNT = BOARD_COUNT + 1
-		WHERE 
-			BOARD_NO = #{BOARD_NO}
-	</update>
-	
-	<update id="deleteBoard">
-		UPDATE 
-			BOARD
-		SET 
-			DELETE_YN = 'Y', DELETE_DATE = NOW()
-		WHERE 
-			BOARD_NO = #{BOARD_NO}
-	</update>
-	
-	
+   
+   <select id="getBoardList" resultType="Board">
+      select @num:=@num+1 AS BOARD_ROW ,b.*, u.USER_NICKNAME as BOARD_WRITER
+      from (SELECT @num:=0) AS n, board b
+      left outer join userinfo u ON(b.USER_NO = u.USER_NO)
+      where b.DELETE_YN = 'n'
+      order by BOARD_NO desc, BOARD_ROW desc
+      limit #{start}, 10
+   </select>
+   
+   <select id="getListCount" resultType="_int">
+      select count(*)
+      from board
+   </select>
+   
+   <insert id="insertBoard">
+      INSERT INTO BOARD
+      (
+         BOARD_TITLE,
+         BOARD_CONTENTS, 
+         BOARD_DATE, 
+         USER_NO
+      )VALUES(
+         #{BOARD_TITLE}, 
+         #{BOARD_CONTENTS}, 
+         now(), 
+         #{USER_NO}
+      )
+   </insert>
+   
+   <insert id="nmInsertBoard">
+      INSERT INTO BOARD
+      (
+         BOARD_TITLE,
+         BOARD_CONTENTS, 
+         BOARD_DATE,
+         nmPassword
+      )VALUES(
+         #{BOARD_TITLE}, 
+         #{BOARD_CONTENTS},
+         now(),
+         #{nmPassword}
+      )
+   </insert>
+   
+   <select id="boardSelect" resultType="Board">
+      SELECT b.*, u.USER_NICKNAME as BOARD_WRITER
+      FROM BOARD b
+      left outer join userinfo u ON(b.USER_NO = u.USER_NO)
+      WHERE BOARD_NO = #{BOARD_NO}
+   </select>
+   
+   <update id="updateBoard">
+      UPDATE
+         BOARD
+      SET
+         BOARD_TITLE = #{BOARD_TITLE}
+         , BOARD_CONTENTS = #{BOARD_CONTENTS}
+         , updateDate = NOW()
+      WHERE 
+         BOARD_NO = #{BOARD_NO}
+   </update>
+   
+   <update id="boardCount">
+      UPDATE
+         BOARD
+      SET 
+         BOARD_COUNT = BOARD_COUNT + 1
+      WHERE 
+         BOARD_NO = #{BOARD_NO}
+   </update>
+   
+   <update id="deleteBoard">
+      UPDATE 
+         BOARD
+      SET 
+         DELETE_YN = 'Y', DELETE_DATE = NOW()
+      WHERE 
+         BOARD_NO = #{BOARD_NO}
+   </update>
+   
+    <update id="nmUpdateBoard">
+      UPDATE
+         BOARD
+      SET
+         BOARD_TITLE = #{BOARD_TITLE}
+         , BOARD_CONTENTS = #{BOARD_CONTENTS}
+         , nmPassword = #{nmPassword}
+         , updateDate = NOW()
+      WHERE 
+         BOARD_NO = #{BOARD_NO}
+   </update>
+   
 </mapper>

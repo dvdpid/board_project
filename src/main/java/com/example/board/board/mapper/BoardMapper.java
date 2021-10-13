@@ -3,9 +3,9 @@ package com.example.board.board.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.session.RowBounds;
 
 import com.example.board.board.dto.BoardDto;
+import com.example.board.common.dto.PageDto;
 
 @Mapper
 public interface BoardMapper {
@@ -14,7 +14,7 @@ public interface BoardMapper {
 
 	int getListCount();
 
-	List<BoardDto> getBoardList(RowBounds rowBounds);
+	List<BoardDto> getBoardList(PageDto pageDto);
 
 	int insertBoard(BoardDto b);
 
@@ -25,5 +25,9 @@ public interface BoardMapper {
 	void boardCount(int bNo);
 
 	int deleteBoard(BoardDto b);
+
+	int nmInsertBoard(BoardDto b);
+
+	int nmUpdateBoard(BoardDto b);
 
 }

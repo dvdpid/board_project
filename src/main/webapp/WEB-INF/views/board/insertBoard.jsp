@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/css/board/boardInsert.css"type="text/css">
     <title>write page</title> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -20,14 +21,22 @@
                     <!-- Form Name -->
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-12" for="txtTitle">Title</label>
+                        <label class="col-md-12" for="txtTitle">제목</label>
                         <div class="col-md-12">
-                            <input id="txtTitle" name="title" type="text" placeholder="제목을 입력하세요." class="form-control input-md", autofocus required><!--required : 공백입력시 경고-->
+                            <input id="txtTitle" name="title" type="text" placeholder="제목을 입력하세요.(최대 30글자)" style="width: 500px;" maxlength="30"  class="form-control input-md", autofocus required><!--required : 공백입력시 경고-->
                         </div>
                     </div>
+                    <c:if test="${empty loginUser}">
+                    <div class="form-group">
+                        <label class="col-md-12" for="txtTitle">비밀번호</label>
+                        <div class="col-md-12">
+                            <input id="txtPwd" name="password" type="password" placeholder="비밀번호를 입력하세요.(최대 12글자)" style="width: 300px;" maxlength="12" style="width: 200px;" class="form-control input-md", autofocus required><!--required : 공백입력시 경고-->
+                        </div>
+                    </div>
+                    </c:if>
                     <!-- Textarea -->
                     <div class="form-group">
-                        <label class="col-md-12" for="txtPost">Post</label>
+                        <label class="col-md-12" for="txtPost">내용</label>
                         <div class="col-md-12">
                             <textarea class="form-control" id="txtPost" name="content" placeholder="내용을 입력하세요." style="height:260px;" required></textarea>
                         </div>
@@ -36,7 +45,13 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
+                        <c:if test="${ !empty loginUser}">
                             <input id="singlebutton" name="singlebutton" class="btn btn-primary" value="작성하기">
+                         </c:if>
+                         <c:if test="${ empty loginUser}">
+                            <input id="nmInsertBtn" name="nmInsertBtn" class="btn btn-primary" value="작성하기">
+                         </c:if>
+                            <input class="btn btn-primary"   onclick="window.history.back()" value="취소하기">
                         </div>
                     </div>
         </section>

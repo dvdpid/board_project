@@ -14,7 +14,7 @@ public class MybatisConfig {
 	   public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 	      SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 	      sessionFactory.setDataSource(dataSource);
-	      sessionFactory.setTypeAliasesPackage("com.example.board.board.dto");
+	      sessionFactory.setTypeAliasesPackage("com.example.board.board.dto , com.example.board.user.dto");
 	      
 	      Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml");
 	      sessionFactory.setMapperLocations(res);

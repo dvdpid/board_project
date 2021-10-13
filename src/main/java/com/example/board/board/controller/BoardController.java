@@ -3,9 +3,6 @@ package com.example.board.board.controller;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -20,8 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.board.board.dto.BoardDto;
 import com.example.board.board.service.BoardService;
-import com.example.board.common.Pagination;
-import com.example.board.common.dto.PageInfo;
+import com.example.board.common.dto.PageDto;
 import com.example.board.user.dto.UserInfoDto;
 
 import lombok.RequiredArgsConstructor;
@@ -38,24 +34,29 @@ public class BoardController {
 	private final HttpSession session;
 	// 게시판 리스트
 	@RequestMapping("/")
-	public String boardList(Model model, @RequestParam(value="page", required = false) Integer page) {
+	public String boardList(Model model
+							, PageDto pageDto
+							, @RequestParam(value="nowPage", required=false)String nowPage
+							, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
-		int currentPage = 1;
-		if(page != null) {
-			currentPage = page;
+		int total = boardService.getListCount();
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "10";
 		}
 		
-		// 전체 게시물 개수
-		int listCount = boardService.getListCount();
 		
-		// 페이징 정보
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		pageDto = new PageDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
-		List<BoardDto> bList = boardService.getBoardList(pi);
+		List<BoardDto> bList = boardService.getBoardList(pageDto);
 		
-		
+		model.addAttribute("paging", pageDto);
 		model.addAttribute("bList", bList);
-		model.addAttribute("pi", pi);
 		
 		return "/board/board";
 	}
@@ -73,15 +74,23 @@ public class BoardController {
 		
 		int result = boardService.insertBoard(b);
 		
-		log.info("log test");
-		
-		
 		return result;
 		
 	}
+	
+	// 비회원 게시글 작성
+	@PostMapping("/nmInsertBoard.bo")
+	@ResponseBody
+	public int nmInsertBoard(@ModelAttribute BoardDto b) {
+		int result = boardService.nmInsertBoard(b);
+		
+		return result;
+	}
+	
+	
 	// 게시글 상세조회
 	@GetMapping("/boardDetail.bo")
-	public String boardDetail(@RequestParam(value="page", required = false) Integer page,
+	public String boardDetail(@RequestParam(value="nowPage", required=false)String nowPage,
 							 @RequestParam("BOARD_NO") int bNo,
 								Model m ) {
 		BoardDto bDetail = boardService.boardSelect(bNo);
@@ -97,7 +106,7 @@ public class BoardController {
 //			e.printStackTrace();
 		}
 		
-		m.addAttribute("page", page).addAttribute("bDetail", bDetail);
+		m.addAttribute("nowPage", nowPage).addAttribute("bDetail", bDetail);
 		
 		return "/board/boardDetail";
 		
@@ -105,11 +114,12 @@ public class BoardController {
 	
 	// 게시글 수정 페이지로 이동
 	@GetMapping("/updatePage.bo")
-	public String updatePage(@RequestParam("bNo") int bNo, Model m, @RequestParam(value="page", required = false) Integer page){
+	public String updatePage(@RequestParam("bNo") int bNo, Model m, 
+							 @RequestParam(value="nowPage", required=false)String nowPage){
 		
 		BoardDto b = boardService.boardSelect(bNo);
 		m.addAttribute("b", b);
-		m.addAttribute("page", page);
+		m.addAttribute("nowPage", nowPage);
 		
 		
 		return "/board/boardUpdate";
@@ -117,11 +127,11 @@ public class BoardController {
 	// 게시글 수정
 	@PostMapping("/updateBoard.bo")
 	@ResponseBody
-	public int updateBoard(@ModelAttribute BoardDto b, @RequestParam(value="page", required = false) Integer page, Model m) {
+	public int updateBoard(@ModelAttribute BoardDto b, @RequestParam(value="nowPage", required=false)String nowPage, Model m) {
 		
 		
 		int result = boardService.updateBoard(b);
-		m.addAttribute("page", page);
+		m.addAttribute("nowPage", nowPage);
 		return result;
 		
 	}
@@ -133,6 +143,25 @@ public class BoardController {
 		int result = boardService.deleteBoard(b);
 		
 		return result;
-		
 	}
+	// 비회원 수정 버튼 누를시 비밀번호 확인 페이지로 이동
+	@RequestMapping("/mmPwdCheck.bo")
+	@ResponseBody
+	public boolean mmPwdCheck(@ModelAttribute BoardDto b) {
+		
+		boolean result = boardService.mmPwdCheck(b);
+		
+		return result;
+	}
+	
+	@RequestMapping("/nmUpdateBoard.bo")
+	@ResponseBody
+	public int nmUpdateBoard(@ModelAttribute BoardDto b, @RequestParam(value="nowPage", required=false)String nowPage, Model m) {
+		
+		int result = boardService.nmUpdateBoard(b);
+		m.addAttribute("nowPage", nowPage);
+		
+		return result;
+	}
+	
 }

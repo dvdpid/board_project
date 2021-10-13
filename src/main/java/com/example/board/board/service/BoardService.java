@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.board.board.dto.BoardDto;
 import com.example.board.board.mapper.BoardMapper;
-import com.example.board.common.dto.PageInfo;
+import com.example.board.common.dto.PageDto;
 import com.example.board.user.dto.UserInfoDto;
 
 import lombok.RequiredArgsConstructor;
@@ -21,20 +22,21 @@ public class BoardService {
 	
 	private final HttpSession session;
 	private final BoardMapper boardMapper;
-	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public int getListCount() {
 		return boardMapper.getListCount();
 	}
 	
-	public List<BoardDto> getBoardList(PageInfo pi) {
+	public List<BoardDto> getBoardList(PageDto pageDto) {
 		
-		// 어디서부터 가져올지 계산
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		// offset 부터 몇개씩 가져올건지
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return boardMapper.getBoardList(rowBounds);
+//		// 어디서부터 가져올지 계산
+//		int offset = (pageRequest.getCurrentPage() - 1) * pageRequest.getBoardLimit();
+//		// offset 부터 몇개씩 가져올건지
+//		RowBounds rowBounds = new RowBounds(offset, pageRequest.getBoardLimit());
+//		
+		return boardMapper.getBoardList(pageDto);
 	}
 
 	public int insertBoard(BoardDto b) {
@@ -62,6 +64,38 @@ public class BoardService {
 
 	public int deleteBoard(BoardDto b) {
 		return boardMapper.deleteBoard(b);
+	}
+
+	public int nmInsertBoard(BoardDto b) {
+		// spring-security를 통한 비밀번호 암호화를 통해 db에 저장
+		String encodePwd = passwordEncoder.encode(b.getNmPassword());
+		b.setNmPassword(encodePwd);
+		
+		return boardMapper.nmInsertBoard(b);
+	}
+
+	public boolean mmPwdCheck(BoardDto b) {
+		
+		int bNo = b.getBOARD_NO();
+		BoardDto boardDto = boardMapper.boardSelect(bNo);
+		
+		if(boardDto == null) {
+			return false;
+		}
+		if(passwordEncoder.matches(b.getNmPassword(), boardDto.getNmPassword())){
+			return true;
+		} else {
+			return false;
+		}
+		
+		
+	}
+
+	public int nmUpdateBoard(BoardDto b) {
+		String encodePwd = passwordEncoder.encode(b.getNmPassword());
+		b.setNmPassword(encodePwd);
+		
+		return boardMapper.nmUpdateBoard(b);
 	}
 	
 }
