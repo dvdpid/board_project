@@ -31,7 +31,7 @@
 
 				<tr>
 					<th><label class="must">*</label> 비밀번호</th>
-					<td><input type="password" name="USER_PWD" id="userpwd1" placeholder="비밀번호" style="width: 100%;"></td>
+					<td><input type="password" name="USER_PWD" maxlength="16" id="userpwd1" placeholder="비밀번호" style="width: 100%;"></td>
 
 				</tr>
 				<tr>

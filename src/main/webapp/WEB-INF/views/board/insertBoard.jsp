@@ -51,7 +51,7 @@
                          <c:if test="${ empty loginUser}">
                             <input id="nmInsertBtn" name="nmInsertBtn" class="btn btn-primary" value="작성하기">
                          </c:if>
-                            <input class="btn btn-primary"   onclick="window.history.back()" value="취소하기">
+                            <input class="btn btn-primary" onclick="window.history.back()" value="취소하기">
                         </div>
                     </div>
         </section>

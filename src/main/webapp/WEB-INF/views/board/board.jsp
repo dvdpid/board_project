@@ -33,7 +33,7 @@
          </thead>
          <tbody>
          <c:forEach var="b" items="${bList}">
-            <tr class="bDetail" onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO} + '&nowPage=' + ${paging.nowPage}">
+            <tr class="bDetail" style='cursor:pointer' onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO} + '&nowPage=' + ${paging.nowPage}">
                <td>${b.BOARD_ROW}</td>
                <td id="td_title" nowrap="nowrap">${b.BOARD_TITLE}</td>
                <c:if test="${!empty b.BOARD_WRITER}">

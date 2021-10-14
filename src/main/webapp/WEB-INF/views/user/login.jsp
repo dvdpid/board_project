@@ -18,11 +18,9 @@
 		<br>
 			<table id="loginTable" style="text-align:center;">
 				<tr>
-					
 					<td colspan="2"><input type="text" id="userId" name="USER_ID" placeholder="아이디"></td>
 				</tr>			
 				<tr>
-					
 					<td colspan="2"><input type="password" id="userPwd" name="USER_PWD" placeholder="비밀번호"></td>
 				</tr>
 				<tr>
@@ -32,7 +30,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<a href="signUpPage.do">| 회원가입 |</a>
+						<a href="signUpPage.do" style='cursor:pointer'>| 회원가입 |</a>
 					</td>
 				</tr>
 			</table>

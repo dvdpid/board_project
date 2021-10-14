@@ -49,7 +49,7 @@ $("#nmInsertBtn").on("click", function() {
 		return;
 	}
 	if($('#txtPost').val() == ""){
-		alert("제목을 입력해주세요.");
+		alert("내용을 입력해주세요.");
 		$('#txtPost').focus();
 		return;
 	}

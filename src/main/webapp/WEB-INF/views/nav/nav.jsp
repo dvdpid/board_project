@@ -18,15 +18,15 @@
 		<nav>
 		<c:if test="${ empty loginUser}">
 			<ul class="link">
-				<li><a id="login">로그인</a></li>
-				<li><a id="signUp">회원가입</a></li>
+				<li><a id="login" style='cursor:pointer'>로그인</a></li>
+				<li><a id="signUp" style='cursor:pointer'>회원가입</a></li>
 			</ul>
 		</c:if>
 		<c:if test="${!empty loginUser}">
 			<ul class="link">
-				<li><a><c:out value="${ loginUser.USER_NICKNAME }님"/></a></li> 
-				<li><a id="logout" href="/doLogout">로그아웃</a></li>
-				<li><a href="mypageForm.do">내 정보보기</a></li>	
+				<li><a style='cursor:pointer'><c:out value="${loginUser.USER_NICKNAME}님"/></a></li> 
+				<li><a id="logout" href="/doLogout" style='cursor:pointer'>로그아웃</a></li>
+				<li><a href="mypageForm.do" style='cursor:pointer'>내 정보보기</a></li>	
 			</ul>
 		</c:if>
 		</nav>	

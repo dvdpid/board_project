@@ -49,11 +49,11 @@
 					</tr>
 					<tr>
 						<td>작성일자</td>
-						<td colspan="2">${bDetail.BOARD_DATE }</td>
+						<td colspan="2">${bDetail.BOARD_DATE}</td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" style="min-height: 400px; text-align: left; white-space: pre; "><c:out value="${bDetail.BOARD_CONTENTS }" /></td>
+						<td colspan="2" style="min-height: 400px; text-align: left; white-space: pre; "><c:out value="${bDetail.BOARD_CONTENTS}"/></td>
 					</tr>
 				</tbody>
 			</table>

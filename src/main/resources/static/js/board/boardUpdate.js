@@ -67,7 +67,6 @@ $("#nmUpdateBtn").on("click", function() {
 		return;
 	}
 	
-	
 	axios.post("/nmUpdateBoard.bo", params)
 		.then( res => {
 			if(res.data > 0){

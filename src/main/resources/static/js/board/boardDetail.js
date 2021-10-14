@@ -69,15 +69,15 @@ $("#nmBoardUpdate").on("click", function() {
 	});	  
 });
 
+// 비회원 게시글 삭제 버튼
 $("#nmBoardDelete").on("click", function() {
-	
+		
+		// bootbox password 타입 입력창 띄우기
 		bootbox.prompt({
 	    title: "게시글 비밀번호를 입력해주세요",
 	    inputType: 'password',
 	    callback: function (result) {
 	     
-
-		
 		let bNo = $("#boardNo").val();
 		let nowPage = $("#nowPage").val();
 		
@@ -103,10 +103,8 @@ $("#nmBoardDelete").on("click", function() {
 								}
 							}).catch(err => {
 								alert("서버 오류 다시 시도해주세요");
-							})
+						})
 					}
-					
-					
 				} else{
 					alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
 				}

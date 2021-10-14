@@ -14,14 +14,14 @@
     <div class="container">
         <div class="header">
             <h3 class="text-muted">게시판 수정</h3>
-            <input id="boardNo" type="hidden" value="${b.BOARD_NO }">
+            <input id="boardNo" type="hidden" value="${b.BOARD_NO}">
             <input id="nowPage" type="hidden" value="${nowPage}">
             
         </div>
                     <div class="form-group">
                         <label class="col-md-12" for="txtTitle">제목</label>
                         <div class="col-md-12">
-                            <input type="text"  id="txtTitle" name="title" value="${b.BOARD_TITLE }" class="form-control input-md"><!--required : 공백입력시 경고-->
+                            <input type="text" id="txtTitle" name="title" value="${b.BOARD_TITLE}" class="form-control input-md"><!--required : 공백입력시 경고-->
                         </div>
                     </div>
                     <c:if test="${b.USER_NO == ''}">
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label class="col-md-12" for="txtPost">내용</label>
                         <div class="col-md-12">
-                            <textarea class="form-control" id="txtPost" name="content" style="height:260px;" required>${b.BOARD_CONTENTS }</textarea>
+                            <textarea class="form-control" id="txtPost" name="content" style="height:260px;" required>${b.BOARD_CONTENTS}</textarea>
                         </div>
                     </div>
                     <!-- Button -->

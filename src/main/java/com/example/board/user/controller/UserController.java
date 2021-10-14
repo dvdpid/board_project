@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.board.board.controller.BoardController;
 import com.example.board.user.dto.UserInfoDto;
 import com.example.board.user.dto.UserLogin;
 import com.example.board.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 @SessionAttributes("loginUser")
 @RequestMapping("/user")
 public class UserController {
@@ -35,14 +38,14 @@ public class UserController {
 	
 	// 로그인 페이지 이동
 	@GetMapping("/loginPage.do")
-	public String loginPage() {
+	public String loginPage() throws Exception {
 		return "user/login";
 	}
 	// 로그인 기능
 	@PostMapping("/login.do")
 	@ResponseBody
 	public boolean login(@ModelAttribute UserLogin u, Model m,
-								 HttpSession session) {
+								 HttpSession session) throws Exception {
 		
 		UserInfoDto userInfoDto = userService.userId(u);
 		
@@ -70,31 +73,46 @@ public class UserController {
 	// 회원가입 기능
 	@ResponseBody
 	@PostMapping("/signUp.do")
-	public int signUp(@Valid @ModelAttribute UserInfoDto u, ModelMap m) {
+	public int signUp(@Valid @ModelAttribute UserInfoDto u, ModelMap m) throws Exception {
 		//	@ModelAttribute 생략 가능
 		
-		int result = userService.signUpUser(u);
-		
-		return result;
+		try {
+			int result = userService.signUpUser(u);
+			return result;
+			
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return 0;
+		}
 		
 	}
 	
 	// 아이디 중복 체크
 	@GetMapping("/checkId.do")
 	@ResponseBody
-	public String checkId(@RequestParam("USER_ID") String id) {
+	public String checkId(@RequestParam("USER_ID") String id) throws Exception {
 		
-		int result = userService.checkId(id);
-		
-		return result+"";
+		try {
+			int result = userService.checkId(id);
+			return result+"";
+			
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return null;
+		}
 	}
 	// 닉네임 중복 체크
 	@GetMapping("/checkNickname.do")
 	@ResponseBody
-	public String checkNickname(@RequestParam("USER_NICKNAME") String nickname) {
-		int result = userService.checkNickname(nickname);
-		
-		return result+"";
+	public String checkNickname(@RequestParam("USER_NICKNAME") String nickname) throws Exception {
+		try {
+			int result = userService.checkNickname(nickname);
+			return result+"";
+			
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return null;
+		}
 	}
 	
 	// 로그아웃은 스프링 시큐리티에서 처리
