@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
-                            <input id="UpdateBtn" name="singlebutton" class="btn btn-primary" value="수정하기">
+                            <input id="UpdateBtn" name="singlebutton" class="btn btn-primary" readonly="readonly" value="수정하기">
                             <input class="btn btn-primary" value="취소" onclick="location.href='/'">
                         </div>
                  	</div>
@@ -53,10 +53,10 @@
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
                             <input id="nmUpdateBtn" name="singlebutton" class="btn btn-primary" value="수정하기">
-                            <input class="btn btn-primary" value="취소" onclick="location.href='/'">
+                            <input class="btn btn-primary" value="취소" readonly="readonly" onclick="location.href='/'">
                         </div>
                  	</div>
-                  	</c:if>
+                  </c:if>
     </div>
      <script type="text/javascript" src="/js/board/boardUpdate.js"></script>
     	

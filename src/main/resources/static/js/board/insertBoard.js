@@ -1,4 +1,5 @@
 $('.guide').hide();
+
 // 작성하기 버튼
 $("#singlebutton").on("click", function() {
 	

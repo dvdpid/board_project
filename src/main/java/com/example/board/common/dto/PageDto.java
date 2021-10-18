@@ -54,7 +54,7 @@ public class PageDto {
 		}
 		setStartPage(getEndPage() - cntPage + 1);
 		if (getStartPage() < 1) {
-			setStartPage(1);
+			setStartPage(0);
 		}
 	}
 	// DB 쿼리에서 사용할 start, end값 계산

@@ -7,7 +7,7 @@
       select @num:=@num+1 AS BOARD_ROW ,b.*, u.USER_NICKNAME as BOARD_WRITER
       from (SELECT @num:=0) AS n, board b
       left outer join userinfo u ON(b.USER_NO = u.USER_NO)
-      where b.DELETE_YN = 'n'
+      where b.DELETE_YN = 'N'
       order by BOARD_NO desc, BOARD_ROW desc
       limit #{start}, 10
    </select>

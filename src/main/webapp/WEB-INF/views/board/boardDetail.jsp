@@ -53,7 +53,7 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" style="min-height: 400px; text-align: left; white-space: pre; "><c:out value="${bDetail.BOARD_CONTENTS}"/></td>
+						<td colspan="2" style="min-height: 400px; text-align: left; white-space: pre; "><textarea spellcheck="false" style="border: 0px; overflow-y: hidden; outline:none; min-height:400px; min-width: 100%; resize: none;"><c:out value="${bDetail.BOARD_CONTENTS}"/></textarea></td>
 					</tr>
 				</tbody>
 			</table>
