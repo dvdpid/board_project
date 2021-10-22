@@ -30,4 +30,9 @@ public interface BoardMapper {
 
 	int nmUpdateBoard(BoardDto b);
 
+	int searchGetListCount(PageDto pageDto);
+
+	List<BoardDto> getSearchBoardList(PageDto pageDto);
+
+
 }

@@ -32,6 +32,17 @@ public class PageDto {
 	private int cntPage = 10;
 	
 	
+	/* 
+	 * mybatis는 한 가지 자료형밖에 처리를 못함
+	 * 컨트롤러단에서 서비스단으로 던지는 객체 개수는 한개여야 함.
+	 * 그래서 pageDto에 뭉쳐서 보내기 위해 검색 필드를 넣음
+	*/
+	// 검색 타입(제목, 내용, 작성자)
+	private String type;
+	// 검색 내용
+	private String keyword;
+		
+	
 	
 	public PageDto(int total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);
@@ -54,7 +65,7 @@ public class PageDto {
 		}
 		setStartPage(getEndPage() - cntPage + 1);
 		if (getStartPage() < 1) {
-			setStartPage(0);
+			setStartPage(1);
 		}
 	}
 	// DB 쿼리에서 사용할 start, end값 계산

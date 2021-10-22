@@ -31,11 +31,6 @@ public class BoardService {
 	
 	public List<BoardDto> getBoardList(PageDto pageDto) {
 		
-//		// 어디서부터 가져올지 계산
-//		int offset = (pageRequest.getCurrentPage() - 1) * pageRequest.getBoardLimit();
-//		// offset 부터 몇개씩 가져올건지
-//		RowBounds rowBounds = new RowBounds(offset, pageRequest.getBoardLimit());
-//		
 		return boardMapper.getBoardList(pageDto);
 	}
 
@@ -97,5 +92,14 @@ public class BoardService {
 		
 		return boardMapper.nmUpdateBoard(b);
 	}
+
+	public int searchGetListCount(PageDto pageDto) {
+		return boardMapper.searchGetListCount(pageDto);
+	}
+
+	public List<BoardDto> getSearchBoardList(PageDto pageDto) {
+		return boardMapper.getSearchBoardList(pageDto);
+	}
+
 	
 }

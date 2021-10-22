@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+<link rel="stylesheet" href="css/board/boardDetail.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 	
 </head>
 <body>
@@ -16,8 +17,12 @@
 	<br><br><br><br>
 	<div class="container">
 		<div class="row">
-		<input type="hidden" id="boardNo" value="${bDetail.BOARD_NO}" >
-		<input type="hidden" id="nowPage" value="${nowPage}" >
+		<form method="post" id="updateForm" action="updatePage.bo">
+			<input type="hidden" name="BOARD_NO" id="BOARD_NO" value="${bDetail.BOARD_NO}">
+			<input type="hidden" name="BOARD_TITLE" value="${bDetail.BOARD_TITLE}">
+			<input type="hidden" name="BOARD_CONTENTS" value="${bDetail.BOARD_CONTENTS}">
+			<input type="hidden" name="nowPage" value="${nowPage}">
+		</form>
 				<a onclick="location.href='/?nowPage='+${nowPage}" class="btn btn-primary">목록</a>
 				<c:if test="${loginUser.USER_NO eq bDetail.USER_NO}">
 					<a id="boardUpdate" class="btn btn-primary">수정</a>
@@ -53,12 +58,61 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" style="min-height: 400px; text-align: left; white-space: pre; "><textarea spellcheck="false" style="border: 0px; overflow-y: hidden; outline:none; min-height:400px; min-width: 100%; resize: none;"><c:out value="${bDetail.BOARD_CONTENTS}"/></textarea></td>
+						<td colspan="2" style="text-align: left; white-space: pre; "><textarea spellcheck="false" style="border: 0px;  outline:none; min-height:300px; min-width: 100%; resize: none;"><c:out value="${bDetail.BOARD_CONTENTS}"/></textarea></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	
+	<!-- 수정 모달 팝업 부분 -->
+		<div class="container2"> <!-- 컨테이너 영역 -->
+		  <div class="popup-wrap" id="popup"> <!-- 모달창을 감쌀 박스 -->
+		    <div class="popup">	<!-- 실질적 모달팝업 -->
+		      <div class="popup-body">	<!-- 컨텐츠 영역 -->
+		        <div class="body-content">
+		          <div class="body-titlebox">
+		            <h3>비밀번호를 입력해주세요.</h3>
+		          </div>
+		          <div class="body-contentbox">
+		            <input id="modalPWd" type="password">
+		          </div>
+		        </div>
+		      </div>
+			      <div class="popup-foot"> <!-- 푸터 버튼 영역 -->
+			        <span class="pop-btn confirm" id="confirm">확인</span>
+			        <span class="pop-btn confirm" id="close">취소</span>
+			      </div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+	<!-- 삭제 모달 팝업 부분 -->
+		<div class="container2"> <!-- 컨테이너 영역 -->
+		  <div class="popup-wrap" id="popup2"> <!-- 모달창을 감쌀 박스 -->
+		    <div class="popup">	<!-- 실질적 모달팝업 -->
+		      <div class="popup-body">	<!-- 컨텐츠 영역 -->
+		        <div class="body-content">
+		          <div class="body-titlebox">
+		            <h3>비밀번호를 입력해주세요.</h3>
+		          </div>
+		          <div class="body-contentbox">
+		            <input id="modalPWd2" type="password">
+		          </div>
+		        </div>
+		      </div>
+			      <div class="popup-foot"> <!-- 푸터 버튼 영역 -->
+			        <span class="pop-btn confirm" id="confirm2">확인</span>
+			        <span class="pop-btn confirm" id="close2">취소</span>
+			      </div>
+				</div>
+			</div>
+		</div>
+		
+		
 	<script src="js/bootstrap/bootstrap.js"></script>
 	<script src="js/bootbox.js"></script>
 	

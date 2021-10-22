@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label class="col-md-12" for="txtPost">내용</label>
                         <div class="col-md-12">
-                            <textarea class="form-control" id="txtPost" name="content" placeholder="내용을 입력하세요." style="height:260px;" required></textarea>
+                            <textarea class="form-control" id="txtPost" name="content" maxlength="1000" placeholder="내용을 입력하세요.(최대 1000글자)" style="height:260px;" required></textarea>
                         </div>
                     </div>
                     <!-- Button -->

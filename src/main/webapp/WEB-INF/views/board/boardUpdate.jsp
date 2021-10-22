@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label class="col-md-12" for="txtPost">내용</label>
                         <div class="col-md-12">
-                            <textarea class="form-control" id="txtPost" name="content" style="height:260px;" required>${b.BOARD_CONTENTS}</textarea>
+                            <textarea class="form-control" id="txtPost" maxlength="1000" name="content" style="height:260px;" required>${b.BOARD_CONTENTS}</textarea>
                         </div>
                     </div>
                     <!-- Button -->
@@ -53,7 +53,7 @@
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
                             <input id="nmUpdateBtn" name="singlebutton" class="btn btn-primary" value="수정하기">
-                            <input class="btn btn-primary" value="취소" readonly="readonly" onclick="location.href='/'">
+                            <input class="btn btn-primary" value="취소" readonly="readonly" onclick="window.history.back();">
                         </div>
                  	</div>
                   </c:if>

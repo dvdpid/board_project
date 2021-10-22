@@ -25,3 +25,6 @@
   		text-decoration: none;
   		color: black;
   	}
+	.search{
+		display: inline-block;
+	}

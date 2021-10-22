@@ -94,10 +94,9 @@ public class BoardRestController {
 		
 		// 비회원 수정 버튼 누를시 비밀번호 확인 페이지로 이동
 		@PostMapping("/mmPwdCheck.bo")
-		@ResponseBody
-		public boolean mmPwdCheck(@ModelAttribute BoardDto b) throws Exception {
-			
+		public boolean mmPwdCheck(@ModelAttribute BoardDto b, Model m) throws Exception {
 			try {
+				log.info("비밀번호 확인 : " + b.getNmPassword());
 				boolean result = boardService.mmPwdCheck(b);
 				return result;
 			} catch (Exception e) {
@@ -108,7 +107,6 @@ public class BoardRestController {
 		
 		// 비회원 수정 기능
 		@PostMapping("/nmUpdateBoard.bo")
-		@ResponseBody
 		public int nmUpdateBoard(@ModelAttribute BoardDto b
 								, @RequestParam(value="nowPage", required=false)String nowPage
 								, Model m) throws Exception {
