@@ -16,20 +16,28 @@
    <c:import url="../common/header.jsp"></c:import>
    <c:import url="../nav/nav.jsp"></c:import>
    
+
+   
+   
    <!-- 게시판 -->
    <div class="container">
       <h2>게시판</h2><br>
       <input type="hidden" id="loginUser" value="${loginUser}">
       <div class="search">
 	      <select id="searchType" name="type">
-	      	<option value="title">제목</option>
-	      	<option value="content">내용</option>
-	      	<option value="writer">작성자</option>
+	      	<option value="title" 
+	      		<c:if test="${paging.searchType eq 'title'}">selected</c:if>>제목
+	      	</option>
+	      	<option value="content" 
+	      		<c:if test="${paging.searchType eq 'content'}">selected</c:if>>내용
+	      	</option>
+	      	<option value="writer" 
+	      		<c:if test="${paging.searchType eq 'writer'}">selected</c:if>>작성자
+	      	</option>
 	      </select>
       </div>
-      <input type="text" id="keyword" value="">
+      <input type="text" id="keyword" value="${paging.keyword}">
       <input type="button" id="searchBtn" class="btn btn-outline-primary mr-2" value="검색">
-      
       <table border="1" class="table table-hover">
          <thead>
             <tr>
@@ -44,7 +52,7 @@
          <c:if test="${bList ne null}">
 	         <c:if test="${total != '0'}">
 		         <c:forEach var="b" items="${bList}">
-		            <tr class="bDetail" style='cursor:pointer' onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO} + '&nowPage=' + ${paging.nowPage}">
+		            <tr class="bDetail" style='cursor:pointer' onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO}+'&nowPage='+${paging.nowPage}">
 		               <td>${b.BOARD_ROW}</td>
 		               <td id="td_title" nowrap="nowrap">${b.BOARD_TITLE}</td>
 		               <c:if test="${!empty b.BOARD_WRITER}">
@@ -67,7 +75,7 @@
          <c:if test="${sbList ne null}">
              <c:if test="${total != '0'}">
 		         <c:forEach var="b" items="${sbList}">
-		            <tr class="bDetail" style='cursor:pointer' id="searchDetail" onclick="location.href='/boardDetail.bo?BOARD_NO='+ ${b.BOARD_NO} +'&nowPage='+${paging.nowPage}" >
+		            <tr class="bDetail" style='cursor:pointer' id="searchDetail" onclick="location.href='/boardDetail.bo?BOARD_NO='+${b.BOARD_NO}+'&nowPage='+${paging.nowPage}+'&searchType='+$('#searchType').val()+'&keyword='+$('#keyword').val();">
 		               <td>${b.BOARD_ROW}</td>
 		               <td id="td_title" nowrap="nowrap">${b.BOARD_TITLE}</td>
 		               <c:if test="${!empty b.BOARD_WRITER}">
@@ -97,7 +105,7 @@
             	<a href="/?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
             </c:if>
             <c:if test="${sbList ne null}">
-            	<a href="searchBoard.bo?type=${paging.type}&keyword=${paging.keyword}&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
+            	<a href="searchBoard.bo?searchType=${paging.searchType}&keyword=${paging.keyword}&nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
             </c:if>
          </c:if>
          <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
@@ -110,7 +118,7 @@
                   <a href="/?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
                </c:if>
                <c:if test="${sbList ne null}">
-              	 <a href="searchBoard.bo?type=${paging.type}&keyword=${paging.keyword}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+              	 <a href="searchBoard.bo?searchType=${paging.searchType}&keyword=${paging.keyword}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
                </c:if>
                </c:when>
             </c:choose>
@@ -120,7 +128,7 @@
 	            <a href="/?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
          	</c:if>
          	<c:if test="${sbList ne null}">
-         		<a href="searchBoard.bo?type=${paging.type}&keyword=${paging.keyword}&nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
+         		<a href="searchBoard.bo?searchType=${paging.searchType}&keyword=${paging.keyword}&nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
          	</c:if>
          </c:if>
       </div>
@@ -131,12 +139,10 @@
       	<a class="btn btn-default pull-right" id="InsertBoard">비회원 글쓰기</a>
       </c:if>
    </div>
-   
-   <form>
-   		<input type="hidden" id="type" value="${paging.type}">
+    <form>
+   		<input type="hidden" id="searchType" value="${paging.searchType}">
    		<input type="hidden" id="keyword" value="${paging.keyword}">
    		<input type="hidden" id="nowPage" value="${paging.nowPage}">
-   		<input type="hidden" id="boardNo" value="${b.BOARD_NO}">
    </form>
    
    <c:import url="../common/footer.jsp"></c:import>

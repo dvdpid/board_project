@@ -23,13 +23,13 @@
    		from board b
    		left outer join userinfo u ON(b.USER_NO = u.USER_NO)
    		where b.DELETE_YN = 'N'
-   		<if test="type == 'title'">
+   		<if test="searchType == 'title'">
    			AND b.board_title like CONCAT('%', #{keyword}, '%')
    		</if>
-   		<if test="type == 'content'">
+   		<if test="searchType == 'content'">
    			AND b.board_contents like CONCAT('%', #{keyword}, '%')
    		</if>
-   		<if test="type == 'writer'">
+   		<if test="searchType == 'writer'">
    			AND u.USER_NICKNAME like CONCAT('%', #{keyword}, '%')
    		</if>
    </select>
@@ -39,13 +39,13 @@
 		from (SELECT @num:=0) AS n, board b
 		left outer join userinfo u ON(b.USER_NO = u.USER_NO)
 		where b.DELETE_YN = 'N'
-		<if test="type == 'title'">
+		<if test="searchType == 'title'">
    			AND b.board_title like CONCAT('%', #{keyword}, '%')
    		</if>
-   		<if test="type == 'content'">
+   		<if test="searchType == 'content'">
    			AND b.board_contents like CONCAT('%', #{keyword}, '%')
    		</if>
-   		<if test="type == 'writer'">
+   		<if test="searchType == 'writer'">
    			AND u.USER_NICKNAME like CONCAT('%', #{keyword}, '%')
    		</if>
 		order by BOARD_NO desc, BOARD_ROW desc

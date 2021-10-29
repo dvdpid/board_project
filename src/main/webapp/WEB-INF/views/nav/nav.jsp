@@ -16,7 +16,7 @@
 			<img id="logo" src="images/logo.png" style='cursor:pointer'>
 		</span>
 		<nav>
-		<c:if test="${ empty loginUser}">
+		<c:if test="${empty loginUser}">
 			<ul class="link">
 				<li><a id="login" style='cursor:pointer'>로그인</a></li>
 				<li><a id="signUp" style='cursor:pointer'>회원가입</a></li>

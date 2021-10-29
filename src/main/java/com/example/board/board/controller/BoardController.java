@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.board.board.dto.BoardDto;
 import com.example.board.board.service.BoardService;
+import com.example.board.comment.dto.CommentDto;
+import com.example.board.comment.service.CommentService;
 import com.example.board.common.dto.PageDto;
 import com.example.board.user.dto.UserInfoDto;
 
@@ -30,13 +32,16 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	
 	private final BoardService boardService;
+	private final CommentService commentService;
 	private final HttpSession session;
 	// 게시판 리스트
 	@RequestMapping("/")
 	public String boardList(Model model
 							, PageDto pageDto
 							, @RequestParam(value="nowPage", required=false) String nowPage
-							, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+							, @RequestParam(value="cntPerPage", required=false)String cntPerPage
+							, @RequestParam(value="searchType", required=false)String searchType
+							, @RequestParam(value="keyword", required=false)String keyword) throws Exception {
 
 		
 			int total = boardService.getListCount();
@@ -55,9 +60,13 @@ public class BoardController {
 			
 			List<BoardDto> bList = boardService.getBoardList(pageDto);
 			
+			pageDto.setSearchType(searchType);
+			pageDto.setKeyword(keyword);
+			
 			
 			model.addAttribute("paging", pageDto);
 			model.addAttribute("bList", bList);
+			
 			
 			return "/board/board";
 
@@ -76,11 +85,16 @@ public class BoardController {
 	@GetMapping("/boardDetail.bo")
 	public String boardDetail(@RequestParam(value="nowPage", required=false)String nowPage
 							, @RequestParam("BOARD_NO") int bNo
-							, @RequestParam(value="type", required=false)String type
+							, @RequestParam(value="searchType", required=false)String searchType
 							, @RequestParam(value="keyword", required=false)String keyword
 							, Model m ) throws Exception {
 		
+		// 게시글 정보
 		BoardDto bDetail = boardService.boardSelect(bNo);
+		
+		// 댓글 리스트
+		List<CommentDto> cList = commentService.cList(bNo);
+		
 		
 		// 조회수 증가
 		try {
@@ -93,8 +107,9 @@ public class BoardController {
 		
 		m.addAttribute("nowPage", nowPage);
 		m.addAttribute("bDetail", bDetail);
-		m.addAttribute("type", type);
+		m.addAttribute("searchType", searchType);
 		m.addAttribute("keyword", keyword);
+		m.addAttribute("cList", cList);
 		
 		
 		return "/board/boardDetail";
@@ -122,7 +137,7 @@ public class BoardController {
 							, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
 		String keyword = pageDto.getKeyword();
-		String type =  pageDto.getType();
+		String searchType =  pageDto.getSearchType();
 		
 		
 		int total = boardService.searchGetListCount(pageDto);
@@ -141,7 +156,7 @@ public class BoardController {
 		
 		pageDto = new PageDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
-		pageDto.setType(type);
+		pageDto.setSearchType(searchType);
 		pageDto.setKeyword(keyword);
 		
 		

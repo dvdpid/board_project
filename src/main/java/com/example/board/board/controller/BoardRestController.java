@@ -25,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardRestController {
 	
 	private final BoardService boardService;
-	private final HttpSession session;
 	
 		// 게시글 작성
 		@PostMapping("/insertBoard.bo")

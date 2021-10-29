@@ -98,7 +98,12 @@ p{
   border-right:1px solid #3b5fbf;
 }
 
-
+ul{
+	 list-style:none;
+}
+li{
+	 list-style:none;
+}
 
 
 
@@ -176,3 +181,59 @@ p{
 .pop-btn.confirm2{
   border-right:1px solid #3b5fbf;
 }
+
+#textA{
+	border: 0px; 
+	outline:none; 
+	min-height: 100%; 
+	min-width: 100%; 
+	overflow: auto;
+}
+#textTd{
+	text-align: left; 
+	white-space: pre; 
+	height: 300px;
+	min-height: 100%; 
+}
+
+#table{
+	height: 100%;
+	overflow: auto;
+}
+
+
+
+/* 댓글 리스트 css */
+.date {
+    font-size: 11px
+}
+
+.comment-text {
+    font-size: 12px
+}
+
+.fs-12 {
+    font-size: 12px
+}
+
+.shadow-none {
+    box-shadow: none
+}
+
+.name {
+    color: #007bff
+}
+
+.cursor:hover {
+    color: blue
+}
+
+.cursor {
+    cursor: pointer
+}
+
+.textarea {
+    resize: none
+}
+
+

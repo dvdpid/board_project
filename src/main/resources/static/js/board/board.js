@@ -8,7 +8,7 @@ $("#searchBtn").on("click", function() {
 	
 	
 	
-	let type = $('#searchType').val();
+	let searchType = $('#searchType').val();
 	let keyword = $('#keyword').val();
 		
 	if(keyword == ""){
@@ -16,20 +16,6 @@ $("#searchBtn").on("click", function() {
 		return;
 	}
 	
-	location.href="searchBoard.bo?type="+type+"&keyword="+keyword;
+	location.href="searchBoard.bo?searchType="+searchType+"&keyword="+keyword;
 	
 });
-/*$("#searchDetail").on("click", function() {
-	let type = $('#searchType').val();
-	let keyword = $('#keyword').val();
-	let nowPage = $('#nowPage').val();
-	let boardNo = $('#boardNo').val();
-	
-	console.log(type);
-	console.log(keyword);
-	console.log(nowPage);
-	console.log(boardNo);
-	
-	
-	location.href='/boardDetail.bo?BOARD_NO='+ boardNo +'&nowPage='+nowPage+'&type='+type+'&keyword='+keyword;
-});*/

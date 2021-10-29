@@ -38,7 +38,7 @@ public class PageDto {
 	 * 그래서 pageDto에 뭉쳐서 보내기 위해 검색 필드를 넣음
 	*/
 	// 검색 타입(제목, 내용, 작성자)
-	private String type;
+	private String searchType;
 	// 검색 내용
 	private String keyword;
 		
