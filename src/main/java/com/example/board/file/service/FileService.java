@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,8 @@ import com.example.board.file.dto.FileDto;
 import com.example.board.file.mapper.FileMapper;
 
 import lombok.RequiredArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class FileService {
@@ -27,19 +29,27 @@ public class FileService {
 
 	/** 파일경로 
 	 * C:\Users\dvdpi\DEV\board\src\main\resources
+	 * C:\Users\dvdpi\git\board_project3\src\main\resources\static
 	 * */
-	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", today).toString();
+//	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", today).toString();
+	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project3", "src", "main", "resources", "static", today).toString();
+	
 	
 	
 	/**
 	 * 파일명을 처리할 랜덤 문자열 반환
+	 * UUID : 네트워크 상에서 서로 모르는 개체들을 식별하고 구별하기 위해서
+	 * 고유성을 완벽하게 보장할 수는 없지만 실제 사용상에서 중복될 가능성이 거의 없다고 인정
 	 */
 	private final String getRandomString() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 	
 	
-	public void insertFile(List<MultipartFile> fileList, int board_No) {
+	public int insertFile(List<MultipartFile> fileList, int board_No) {
+		/** 파일 정보를 담을 빈 리스트 */
+		List<FileDto> attachList = new ArrayList<>();
+		
 		
 		/** 파일경로에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
 		File dir = new File(uploadPath);
@@ -64,16 +74,25 @@ public class FileService {
 				f.setBoard_No(board_No);
 				f.setOrigin_Name(file.getOriginalFilename());
 				f.setChange_Name(saveName);
+				f.setFile_Path(today);
 				f.setFile_Size(file.getSize());
 				
+				attachList.add(f);
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+				log.debug(e.getMessage());
 			}
 			
 		}
+		
+		log.info("파일정보 확인하기 : " +attachList);
+		return fileMapper.insertFile(attachList);
+		
+		
 	}
-	
-	
-	
+
+
+	public List<FileDto> fList(int bNo) {
+		return fileMapper.fList(bNo);
+	}
 }

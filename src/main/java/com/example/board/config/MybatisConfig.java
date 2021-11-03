@@ -35,7 +35,7 @@ public class MybatisConfig implements WebMvcConfigurer {
 	   public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 	      SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 	      sessionFactory.setDataSource(dataSource);
-	      sessionFactory.setTypeAliasesPackage("com.example.board.board.dto , com.example.board.user.dto, com.example.board.comment.dto");
+	      sessionFactory.setTypeAliasesPackage("com.example.board.board.dto , com.example.board.user.dto, com.example.board.comment.dto, com.example.board.file.dto");
 	      
 	      Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml");
 	      sessionFactory.setMapperLocations(res);

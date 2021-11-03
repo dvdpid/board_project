@@ -8,5 +8,9 @@ import com.example.board.file.dto.FileDto;
 
 @Mapper
 public interface FileMapper {
+
+	int insertFile(List<FileDto> attachList);
+
+	List<FileDto> fList(int bNo);
 	
 }

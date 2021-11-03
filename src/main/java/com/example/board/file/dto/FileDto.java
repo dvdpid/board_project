@@ -2,6 +2,8 @@ package com.example.board.file.dto;
 
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Alias("File")
 public class FileDto {
 	
 	// 파일 번호(pk)

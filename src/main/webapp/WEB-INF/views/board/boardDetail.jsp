@@ -70,8 +70,35 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" id="textTd"><textarea id="textA" style="resize: none;" spellcheck="false"><c:out value="${bDetail.BOARD_CONTENTS}"/></textarea></td>
+						<td colspan="2" id="textTd"><textarea id="textA" style="resize: none;" readonly="readonly" spellcheck="false"><c:out value="${bDetail.BOARD_CONTENTS}"/></textarea>
+						</td>
 					</tr>
+					<c:if test="${!empty fList}">
+					<tr>
+						<td colspan="3">
+						<b>이미지</b>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<c:forEach var="f" items="${fList}">
+								<img class="fileImg" src="${f.file_Path}/${f.change_Name}"/>
+							</c:forEach>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							첨부파일
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<c:forEach var="f" items="${fList}">
+								<a href="${f.file_Path}/${f.change_Name}" download="${f.change_Name}">${f.change_Name} &nbsp;</a>
+							</c:forEach>
+						</td>
+					</tr>
+					</c:if>
 				</tbody>
 			</table>
 		</div>

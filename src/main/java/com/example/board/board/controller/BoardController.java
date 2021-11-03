@@ -19,6 +19,8 @@ import com.example.board.board.service.BoardService;
 import com.example.board.comment.dto.CommentDto;
 import com.example.board.comment.service.CommentService;
 import com.example.board.common.dto.PageDto;
+import com.example.board.file.dto.FileDto;
+import com.example.board.file.service.FileService;
 import com.example.board.user.dto.UserInfoDto;
 
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class BoardController {
 	
 	private final BoardService boardService;
 	private final CommentService commentService;
+	private final FileService fileService;
 	private final HttpSession session;
 	// 게시판 리스트
 	@RequestMapping("/")
@@ -95,6 +98,9 @@ public class BoardController {
 		// 댓글 리스트
 		List<CommentDto> cList = commentService.cList(bNo);
 		
+		// 이미지 리스트
+		List<FileDto> fList = fileService.fList(bNo);
+		
 		
 		// 조회수 증가
 		try {
@@ -110,7 +116,7 @@ public class BoardController {
 		m.addAttribute("searchType", searchType);
 		m.addAttribute("keyword", keyword);
 		m.addAttribute("cList", cList);
-		
+		m.addAttribute("fList", fList);
 		
 		return "/board/boardDetail";
 		

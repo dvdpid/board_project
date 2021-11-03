@@ -51,10 +51,10 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
-                        <c:if test="${ !empty loginUser}">
+                        <c:if test="${!empty loginUser}">
                             <input id="singlebutton" name="singlebutton" class="btn btn-primary" readonly="readonly" value="작성하기">
                          </c:if>
-                         <c:if test="${ empty loginUser}">
+                         <c:if test="${empty loginUser}">
                             <input id="nmInsertBtn" name="nmInsertBtn" class="btn btn-primary" readonly="readonly" value="작성하기">
                          </c:if>
                             <input class="btn btn-primary" onclick="window.history.back()" readonly="readonly" value="취소하기">

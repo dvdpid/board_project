@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.comment.mapper.CommentMapper">
+	
+	
+	<select id="cList" resultType="Comment">
+      select *, u.USER_NICKNAME as comment_Writer
+      from comments c
+      left outer join userinfo u ON(c.USER_NO = u.USER_NO)
+      WHERE board_no = #{BOARD_NO}
+      order by comment_group asc, comment_order asc , comment_depth desc
+   </select>
+   
+   <select id="selectOrder" resultType="_int">
+   		select count(*)
+		from comments c 
+		where comment_group = #{comment_Group} and comment_depth = #{comment_Depth} + 1
+   </select>
+	<select id="selectMatch" resultType="_int">
+		select count(*)
+		from comments c
+		where comment_group = #{comment_Group} 
+		and comment_depth >= #{comment_Depth} + 1
+		and comment_order >= #{comment_Order} + 1
+	</select>
+	
+</mapper>

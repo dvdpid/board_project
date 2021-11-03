@@ -24,7 +24,7 @@
                             <input type="text" id="txtTitle" name="title" value="${b.BOARD_TITLE}" class="form-control input-md"><!--required : 공백입력시 경고-->
                         </div>
                     </div>
-                    <c:if test="${b.USER_NO == ''}">
+                   <c:if test="${b.USER_NO==''}">
                     <div class="form-group">
                         <label class="col-md-12" for="txtTitle">비밀번호</label>
                         <div class="col-md-12">
@@ -48,7 +48,7 @@
                         </div>
                  	</div>
                   	</c:if>
-                  	<c:if test="${b.USER_NO == ''}">
+                  	<c:if test="${b.USER_NO==''}">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">

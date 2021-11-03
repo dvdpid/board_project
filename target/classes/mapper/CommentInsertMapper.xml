@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.comment.mapper.CommentMapper">
+
+	
+	<insert id="insertComment">
+		INSERT INTO comments
+	      (
+	         board_no,
+	         user_no, 
+	         create_date,
+	         comment_content,
+	         comment_group
+	      )VALUES(
+	         #{board_No}, 
+	         #{user_No},
+	         now(),
+	         #{comment_Content},
+	         (select * from (select ifnull(max(comment_no + 1), 1) from comments) as a)
+	     )
+	</insert>
+	
+	
+	<insert id="insertReComment">
+	INSERT INTO comments
+      (
+         board_no,
+         user_no, 
+         create_date,
+         comment_content,
+         comment_parent,
+         comment_depth,
+         comment_order,
+         comment_group
+      )VALUES(
+         #{board_No}, 
+         #{user_No},
+         now(),
+         #{comment_Content},
+         #{comment_No},
+         #{comment_Depth} + 1,
+         #{comment_Order} + 1,
+         #{comment_Group}
+      )
+	</insert>
+
+
+</mapper>

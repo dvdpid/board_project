@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+
+
+
+span.ok {
+	color: green;
+}
+
+span.error {
+	color: red;
+}
+#uploadFiles{
+	margin-left: 20px;
+}
