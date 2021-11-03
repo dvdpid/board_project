@@ -3,10 +3,13 @@ $('.guide').hide();
 // 작성하기 버튼
 $("#singlebutton").on("click", function() {
 	
-	const params = new URLSearchParams();
-	
+	const params = new FormData();
+	// 제목
 	params.append("BOARD_TITLE", $('#txtTitle').val());
+	// 내용
 	params.append("BOARD_CONTENTS", $('#txtPost').val());
+	
+
 	
 	if($('#txtTitle').val() == ""){
 		alert("제목을 입력해주세요.");
@@ -19,17 +22,28 @@ $("#singlebutton").on("click", function() {
 		return;
 	}
 	
+	let fileCheck = $("#uploadFiles").val();
 	
 	axios.post("/insertBoard.bo", params)
-		.then( res => {
+		.then( function(res) {
+			// 게시글 작성에 성공 했을경우
 			if(res.data > 0){
-				alert("글 작성에 성공하셨습니다.");
-				document.location.href="/";
+				if(!fileCheck){
+					// 이미지 첨부를 안했을경우
+					alert("글 작성에 성공하셨습니다.");
+					document.location.href="/";
+				}else{
+					// 이미지 첨부를 했을경우
+					// form안의 board_no 에 리턴값 넣어주기
+					$("#board_No").val(res.data);
+					// 이미지 form submit
+					$('#insertFiles').submit();
+				}
 			} else{
 				alert("다시 시도해주세요.");
 			}
 		}).catch(err =>{
-			alert("서버 오류. 다시 시도해주세요.")
+			alert("서버 오류. 다시 시도해주세요.");
 		})
 	
 })
@@ -38,7 +52,7 @@ $("#nmInsertBtn").on("click", function() {
 	
 
 	
-	const params = new URLSearchParams();
+	const params = new FormData();
 	
 	params.append("BOARD_TITLE", $('#txtTitle').val());
 	params.append("BOARD_CONTENTS", $('#txtPost').val());
@@ -73,4 +87,8 @@ $("#nmInsertBtn").on("click", function() {
 		})
     
 })
+$('#btn-upload').click(function (e) {
+        e.preventDefault();
+        $('#uploadFiles').click();
+    });
 

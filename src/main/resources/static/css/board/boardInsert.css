@@ -10,3 +10,6 @@ span.ok {
 span.error {
 	color: red;
 }
+#uploadFiles{
+	margin-left: 20px;
+}

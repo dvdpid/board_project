@@ -22,6 +22,7 @@ public class BoardService {
 	
 	private final HttpSession session;
 	private final BoardMapper boardMapper;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -40,7 +41,16 @@ public class BoardService {
 		int uNo = ((UserInfoDto)session.getAttribute("loginUser")).getUSER_NO();
 		b.setUSER_NO(uNo);
 		
-		return boardMapper.insertBoard(b);
+		/* 
+		 * insert를 성공하면 selectkey를 통해 받아온 값을 return 해준다.
+		 * (바로 files에 값을 넣어주기 위해.)
+		 */
+		if( boardMapper.insertBoard(b) > 0 ) {
+			return b.getBOARD_NO();
+		} else {
+			return 0;
+		}
+		
 	}
 
 	public BoardDto boardSelect(int bNo) {

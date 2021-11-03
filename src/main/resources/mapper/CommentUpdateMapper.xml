@@ -27,6 +27,6 @@
 	   	SET 
 	   		comment_order = comment_order + 1
 	   	WHERE 
-	   		comment_group = #{comment_Group} and comment_order > #{comment_Order}
+	   		comment_group = #{comment_Group} and comment_order >= #{comment_Order}
    </update>
 </mapper>

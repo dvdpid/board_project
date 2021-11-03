@@ -35,6 +35,7 @@ public class BoardRestController {
 				int result = boardService.insertBoard(b);
 				return result;
 				
+				
 			} catch (Exception e) {
 				log.info(e.getMessage());
 				return 0;

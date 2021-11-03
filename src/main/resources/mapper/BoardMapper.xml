@@ -35,8 +35,13 @@
    </select>
   
    <select id="getSearchBoardList" resultType="Board">
-		select @num:=@num+1 AS BOARD_ROW ,b.*, u.USER_NICKNAME as BOARD_WRITER
-		from (SELECT @num:=0) AS n, board b
+		select 
+				@num:=@num+1 AS BOARD_ROW , 
+				b.* ,
+				u.USER_NICKNAME as BOARD_WRITER
+		from 
+			(SELECT @num:=0) AS n
+			, board b
 		left outer join userinfo u ON(b.USER_NO = u.USER_NO)
 		where b.DELETE_YN = 'N'
 		<if test="searchType == 'title'">
@@ -53,6 +58,7 @@
    </select>
    
    <insert id="insertBoard">
+
       INSERT INTO BOARD
       (
          BOARD_TITLE,
@@ -65,6 +71,9 @@
          now(), 
          #{USER_NO}
       )
+       <selectKey resultType="int" keyProperty="BOARD_NO" order="AFTER">
+        select last_insert_id()
+       </selectKey>
    </insert>
    
    <insert id="nmInsertBoard">

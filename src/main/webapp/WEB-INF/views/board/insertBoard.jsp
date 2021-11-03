@@ -17,8 +17,7 @@
         <div class="header">
             <h3 class="text-muted">게시판 글작성</h3>
         </div>
-        <section>
-                    <!-- Form Name -->
+   	     	<section>
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-12" for="txtTitle">제목</label>
@@ -41,6 +40,13 @@
                             <textarea class="form-control" id="txtPost" name="content" maxlength="1000" placeholder="내용을 입력하세요.(최대 1000글자)" style="height:260px;" required></textarea>
                         </div>
                     </div>
+					<!-- 이미지 넣기 -->
+                    <form id="insertFiles" action="insertFile.do" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="board_No" name="board_No">
+						<div class="form-group">
+							<input type="file" id="uploadFiles" name="files" multiple="multiple" accept=".png, .jpg, .jpeg" >
+	                    </div>
+                    </form>
                     <!-- Button -->
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
@@ -54,7 +60,7 @@
                             <input class="btn btn-primary" onclick="window.history.back()" readonly="readonly" value="취소하기">
                         </div>
                     </div>
-        </section>
+        	</section>
     </div>
     <script type="text/javascript" src="/js/board/insertBoard.js"></script>
 </body>

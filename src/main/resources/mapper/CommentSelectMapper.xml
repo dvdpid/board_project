@@ -8,13 +8,13 @@
       from comments c
       left outer join userinfo u ON(c.USER_NO = u.USER_NO)
       WHERE board_no = #{BOARD_NO}
-      order by comment_group asc, comment_order asc ,comment_parent asc, comment_depth desc
+      order by comment_group asc, comment_order asc , comment_depth desc
    </select>
    
    <select id="selectOrder" resultType="_int">
-   		select max(comment_order)
+   		select count(*)
 		from comments c 
-		where comment_group = #{comment_Group}
+		where comment_group = #{comment_Group} and comment_depth = #{comment_Depth} + 1
    </select>
 	<select id="selectMatch" resultType="_int">
 		select count(*)

@@ -108,7 +108,7 @@
 								    <c:if test="${!empty loginUser && c.delete_Yn == 'N'}">
 							   	 		<textarea id="rcontent${c.comment_No}" readonly="readonly" rows="3" class="form-control" style="resize: none; cursor:auto; background: white;">${c.comment_Content}</textarea>
 								    	<span style="font-size: 10px; color: gray;">작성일 : ${c.create_Date} </span> &nbsp; &nbsp;
-								    	<c:if test="${c.comment_Depth < 4}">
+								    	<c:if test="${c.comment_Depth < 3}">
 								    		<span id="rreply${c.comment_No}" style='cursor:pointer; font-size: 10px;'> 답글쓰기 </span> &nbsp;
 								    	</c:if>
 								    	<c:if test="${c.comment_Writer eq loginUser.USER_NICKNAME}">
