@@ -57,5 +57,10 @@ public class UserService {
 	public int checkNickname(String nickname) {
 		return userMapper.checkNickname(nickname);
 	}
+
+
+	public UserInfoDto selectUser(int uNo) {
+		return userMapper.selectUser(uNo);
+	}
 	
 }

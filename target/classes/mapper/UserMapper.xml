@@ -38,4 +38,20 @@
 		FROM USERINFO
 		WHERE USER_NICKNAME = #{nickname}
 	</select>
+	
+	<!-- 유저 정보 받아오기 -->
+	<select id="selectUser" parameterType="userInfo" resultType="userInfo">
+		select
+			user_no,
+			user_id,
+			user_pwd,
+			user_nickname,
+			user_phone,
+			create_date,
+			update_date,
+			delete_yn
+		from userinfo
+		where user_no = #{USER_NO} and delete_yn = 'N'
+	</select>
+	
 </mapper>

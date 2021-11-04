@@ -97,8 +97,6 @@ public class BoardService {
 	}
 
 	public int nmUpdateBoard(BoardDto b) {
-		String encodePwd = passwordEncoder.encode(b.getNmPassword());
-		b.setNmPassword(encodePwd);
 		
 		return boardMapper.nmUpdateBoard(b);
 	}

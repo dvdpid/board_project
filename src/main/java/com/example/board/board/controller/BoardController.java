@@ -128,7 +128,11 @@ public class BoardController {
 							, Model m
 							, @RequestParam(value="nowPage", required=false)String nowPage){
 		
+		// 이미지 리스트
+		List<FileDto> fList = fileService.fList(b.getBOARD_NO());
+		
 		m.addAttribute("b", b);
+		m.addAttribute("fList",fList);
 		m.addAttribute("nowPage", nowPage);
 		
 		

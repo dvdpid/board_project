@@ -29,11 +29,10 @@ public class FileService {
 
 	/** 파일경로 
 	 * C:\Users\dvdpi\DEV\board\src\main\resources
-	 * C:\Users\dvdpi\git\board_project3\src\main\resources\static
 	 * */
-//	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", today).toString();
-	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project3", "src", "main", "resources", "static", today).toString();
-	
+	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", "static", "images", today).toString();
+//	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project3", "src", "main", "resources", "static", today).toString();
+//	
 	
 	
 	/**
@@ -74,7 +73,7 @@ public class FileService {
 				f.setBoard_No(board_No);
 				f.setOrigin_Name(file.getOriginalFilename());
 				f.setChange_Name(saveName);
-				f.setFile_Path(today);
+				f.setFile_Path("images/"+today);
 				f.setFile_Size(file.getSize());
 				
 				attachList.add(f);
@@ -91,8 +90,13 @@ public class FileService {
 		
 	}
 
-
+	/** 파일 리스트 불러오기*/
 	public List<FileDto> fList(int bNo) {
 		return fileMapper.fList(bNo);
+	}
+
+
+	public int deleteFile(int fNo) {
+		return fileMapper.deleteFile(fNo);
 	}
 }

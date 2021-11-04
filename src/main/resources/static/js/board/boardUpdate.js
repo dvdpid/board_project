@@ -6,7 +6,6 @@ $("#UpdateBtn").on("click", function() {
 	let bNo = $("#boardNo").val();
 	let nowPage = $('#nowPage').val();
 	
-	
 	params.append("BOARD_TITLE", $('#txtTitle').val());
 	params.append("BOARD_CONTENTS", $('#txtPost').val());
 	params.append("BOARD_NO", bNo);
@@ -23,12 +22,23 @@ $("#UpdateBtn").on("click", function() {
 		return;
 	}
 	
+	let fileChecks = $("#uploadFiles").val();
 	
 	axios.post("/updateBoard.bo", params)
 		.then( res => {
 			if(res.data > 0){
-				alert("수정성공!.");
-				document.location.href="/boardDetail.bo?BOARD_NO="+bNo+'&nowPage='+nowPage
+				if(!fileChecks){
+					// 이미지 첨부를 안했을경우
+					alert("수정성공!.");
+					document.location.href="/"
+				}else{
+					// 이미지 첨부를 했을경우
+					// 이미지 form submit
+					alert("수정성공!!.");
+					$('#insertFiles').submit();
+				}
+				
+				
 			} else{
 				alert("다시 시도해주세요.");
 			}
@@ -80,3 +90,24 @@ $("#nmUpdateBtn").on("click", function() {
 		})
 	
 })
+
+
+$("[id^=deleteBtn]").on("click", function() {
+	
+	let id = $(this)[0].id;
+	let no = id.replace(/[^0-9]/g,'');
+	
+	
+	$.ajax({
+			url: 'deleteFile.do',
+			data: {file_No: no},
+			success: function(data){
+				console.log("반환값 확인" + data);
+				if(data != '0'){
+					$("#fileList"+no).hide();
+				} else {
+					alert("이미지 삭제 실패!");
+				}
+			}	
+		});
+});

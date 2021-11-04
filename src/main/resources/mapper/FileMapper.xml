@@ -14,7 +14,7 @@
 			create_date,
 			delete_date
 		from files
-		where board_no = #{board_No}
+		where board_no = #{board_No} and delete_yn = 'N'
 	</select>
 
 
@@ -39,4 +39,16 @@
 		)
 		</foreach>
 	</insert>
+	
+	<update id="deleteFile">
+		UPDATE
+			files
+		SET
+			delete_yn = 'Y'
+		where
+			file_no = #{file_No}
+	</update>
+	
+	
+	
 </mapper>

@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="css/board/boardDetail.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style type="text/css">
+.list-group-item{
+	margin-left: 0px;
+}
+</style>
+	
+</head>
+<body>
+	
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/nav/nav.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div class="tab">
+		<span class="image">
+			<img id="logo" src="images/logo.png" style='cursor:pointer'>
+		</span>
+		<nav>
+		
+		
+			<ul class="link">
+				<li><a style='cursor:pointer'>user02님</a></li> 
+				<li><a id="logout" href="/doLogout" style='cursor:pointer'>로그아웃</a></li>
+				<li><a href="mypageForm.do" style='cursor:pointer'>내 정보보기</a></li>	
+			</ul>
+		
+		</nav>	
+	</div>
+</body>
+</html>
+	<br><br><br><br>
+	<div class="container">
+		<div class="row">
+		<form method="post" id="updateForm" action="updatePage.bo">
+			<input type="hidden" name="BOARD_NO" id="BOARD_NO" value="873">
+			<input type="hidden" name="BOARD_TITLE" value="asdsad">
+			<input type="hidden" name="BOARD_CONTENTS" value="1234asd">
+			<input type="hidden" name="nowPage" value="1">
+			<input type="hidden" id="searchType" value="">
+			<input type="hidden" id="keyword" value="">
+		</form>
+				
+				
+					<a onclick="location.href='/?nowPage='+1" class="btn btn-primary">목록</a>
+				
+				
+				
+					<a id="boardUpdate" class="btn btn-primary">수정</a>
+					<a id="boardDelete" class="btn btn-primary">삭제</a>
+				
+				
+				
+				
+			<table id="table" class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시글</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 20%;">글제목</td>
+						<td colspan="2">asdsad</td>
+					</tr>
+					<tr>
+						<td>작성자</td>
+						
+						<td colspan="2">user02</td>
+						
+						
+					</tr>
+					<tr>
+						<td>작성일자</td>
+						<td colspan="2">2021-11-04</td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td colspan="2" id="textTd"><textarea id="textA" style="resize: none;" readonly="readonly" spellcheck="false">1234asd</textarea>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="3">
+						<b>이미지</b>
+						</td>
+					</tr>
+					
+					<!-- 이미지 출력 부분 -->
+					<tr>
+						<td colspan="3">
+							
+								<img class="fileImg" src="images/211104/b289305195d14fb0bb580524c3d82f80.png"/>
+							
+						</td>
+					</tr>
+					
+					<!-- 첨부파일 부분 -->
+					<tr>
+						<td colspan="3">
+							이미지 첨부
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							
+
+								<a href="#" onclick=location.href("images/211104/b289305195d14fb0bb580524c3d82f80.png") download="b289305195d14fb0bb580524c3d82f80.png">b289305195d14fb0bb580524c3d82f80.png &nbsp;</a>
+							
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+		
+		
+		<!--  댓글 작성 -->
+		
+		    <div class="card mb-2">
+				<div class="card-body">
+					<ul class="list-group list-group-flush">
+					    <li class="list-group-item">
+							<textarea class="form-control" maxlength="200" placeholder="댓글을 입력하세요.(최대 200글자)" id="content" rows="3" style="resize: none;"></textarea><br>
+							<button type="button" class="btn btn-dark mt-3" id="commentInsertBtn">댓글 작성</button>
+					    </li>
+					</ul>
+				</div>
+			</div>
+		
+		<hr>
+		<div class="card mb-2">
+			<div class="card mb-2">
+				
+			</div>
+		</div>
+
+
+	</div>
+	
+	<!-- 수정 모달 팝업 부분 -->
+		<div class="container2"> <!-- 컨테이너 영역 -->
+		  <div class="popup-wrap" id="popup"> <!-- 모달창을 감쌀 박스 -->
+		    <div class="popup">	<!-- 실질적 모달팝업 -->
+		      <div class="popup-body">	<!-- 컨텐츠 영역 -->
+		        <div class="body-content">
+		          <div class="body-titlebox">
+		            <h3>비밀번호를 입력해주세요.</h3>
+		          </div>
+		          <div class="body-contentbox">
+		            <input id="modalPWd" type="password">
+		          </div>
+		        </div>
+		      </div>
+			      <div class="popup-foot"> <!-- 푸터 버튼 영역 -->
+			        <span class="pop-btn confirm" id="confirm">확인</span>
+			        <span class="pop-btn confirm" id="close">취소</span><br>
+			        <input type="text">
+			      </div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+	<!-- 삭제 모달 팝업 부분 -->
+		<div class="container2"> <!-- 컨테이너 영역 -->
+		  <div class="popup-wrap" id="popup2"> <!-- 모달창을 감쌀 박스 -->
+		    <div class="popup">	<!-- 실질적 모달팝업 -->
+		      <div class="popup-body">	<!-- 컨텐츠 영역 -->
+		        <div class="body-content">
+		          <div class="body-titlebox">
+		            <h3>비밀번호를 입력해주세요.</h3>
+		          </div>
+		          <div class="body-contentbox">
+		            <input id="modalPWd2" type="password">
+		          </div>
+		        </div>
+		      </div>
+			      <div class="popup-foot"> <!-- 푸터 버튼 영역 -->
+			        <span class="pop-btn confirm" id="confirm2">확인</span>
+			        <span class="pop-btn confirm" id="close2">취소</span>
+			      </div>
+				</div>
+			</div>
+		</div>
+		
+		
+	<script src="js/bootstrap/bootstrap.js"></script>
+	<script src="js/bootbox.js"></script>
+	
+		<script type="text/javascript" src="/js/board/boardDetail.js"></script>
+		<script type="text/javascript" src="/js/nav/nav.js"></script>
+</body>
+</html>

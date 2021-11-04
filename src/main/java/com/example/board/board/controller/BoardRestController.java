@@ -92,7 +92,7 @@ public class BoardRestController {
 		}
 		
 		
-		// 비회원 수정 버튼 누를시 비밀번호 확인 페이지로 이동
+		// 비회원 게시글 비밀번호 확인
 		@PostMapping("/mmPwdCheck.bo")
 		public boolean mmPwdCheck(@ModelAttribute BoardDto b, Model m) throws Exception {
 			try {

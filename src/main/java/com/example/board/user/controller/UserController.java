@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.board.board.controller.BoardController;
 import com.example.board.user.dto.UserInfoDto;
 import com.example.board.user.dto.UserLogin;
 import com.example.board.user.service.UserService;
@@ -31,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user")
 public class UserController {
 	
+	private final HttpSession session;
 	private final UserService userService;
 	private UserInfoDto userInfoDto = new UserInfoDto();
     private Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -124,4 +123,18 @@ public class UserController {
 //		return "user/login";
 //	}
 //	
+	@GetMapping("/mypage.do")
+	public String mypageForm(Model m) throws Exception {
+		// 마이페이지 현재 계정 정보 받아오기
+			int uNo = ((UserInfoDto)session.getAttribute("loginUser")).getUSER_NO();
+			
+			UserInfoDto userInfoDto = userService.selectUser(uNo);
+			
+			m.addAttribute("u",userInfoDto);
+			
+			return "user/mypage";
+				
+		
+		
+	}
 }

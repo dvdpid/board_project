@@ -3,15 +3,18 @@ package com.example.board.file.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.board.board.controller.BoardRestController;
 import com.example.board.file.service.FileService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class FileController {
@@ -35,6 +38,23 @@ public class FileController {
 			return "redirect:/";
 		} else {
 			return "error/errorpage";
+		}
+	}
+	// 지정 파일 삭제
+	@GetMapping("deleteFile.do")
+	@ResponseBody
+	public int deleteFile(@RequestParam("file_No") int fNo) {
+		
+		try {
+			int result = fileService.deleteFile(fNo);
+			if(result > 0) {
+				return result;
+			} else {
+				return 0;
+			}
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return 0;
 		}
 	}
 }

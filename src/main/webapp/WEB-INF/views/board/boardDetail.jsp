@@ -44,6 +44,8 @@
 					<a id="nmBoardUpdate" class="btn btn-primary">수정</a>
 					<a id="nmBoardDelete" class="btn btn-primary">삭제</a>
 				</c:if>
+				
+				
 			<table id="table" class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -79,6 +81,8 @@
 						<b>이미지</b>
 						</td>
 					</tr>
+					
+					<!-- 이미지 출력 부분 -->
 					<tr>
 						<td colspan="3">
 							<c:forEach var="f" items="${fList}">
@@ -86,15 +90,17 @@
 							</c:forEach>
 						</td>
 					</tr>
+					
+					<!-- 첨부파일 부분 -->
 					<tr>
 						<td colspan="3">
-							첨부파일
+							이미지 첨부
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<c:forEach var="f" items="${fList}">
-								<a href="${f.file_Path}/${f.change_Name}" download="${f.change_Name}">${f.change_Name} &nbsp;</a>
+								<a href="${f.file_Path}/${f.change_Name}" download="${f.change_Name}">${f.origin_Name} &nbsp; </a>
 							</c:forEach>
 						</td>
 					</tr>
@@ -125,8 +131,7 @@
 						<ul class="list-group list-group-flush">
 						    <li class="list-group-item" id="replyContent" style="
 						    <c:if test="${empty c.comment_Depth || c.comment_Depth ne 0}">
-						    margin-left: ${c.comment_Depth}00px;
-						    </c:if>
+						    margin-left: ${c.comment_Depth}00px;</c:if>
 						    ">
 							    <b>${c.comment_Writer}</b>
 							    <c:if test="${c.comment_Writer eq bDetail.BOARD_WRITER}">
@@ -139,8 +144,8 @@
 								    		<span id="rreply${c.comment_No}" style='cursor:pointer; font-size: 10px;'> 답글쓰기 </span> &nbsp;
 								    	</c:if>
 								    	<c:if test="${c.comment_Writer eq loginUser.USER_NICKNAME}">
-								    	<span id="rreplyUpdate${c.comment_No}" style='cursor:pointer; font-size: 10px;'>수정하기</span>&nbsp;
-								    	<span id="rreplyDelete${c.comment_No}" style='cursor:pointer; font-size: 10px;'>삭제하기</span>
+									    	<span id="rreplyUpdate${c.comment_No}" style='cursor:pointer; font-size: 10px;'>수정하기</span>&nbsp;
+									    	<span id="rreplyDelete${c.comment_No}" style='cursor:pointer; font-size: 10px;'>삭제하기</span>
 								    	</c:if>
 								    	<br>
 								    	<button type="button" class="btn btn-dark mt-3" id="commentUpdateBtn${c.comment_No}" style="display: none;">댓글 수정</button>

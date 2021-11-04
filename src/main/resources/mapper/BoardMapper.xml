@@ -133,7 +133,6 @@
       SET
          BOARD_TITLE = #{BOARD_TITLE}
          , BOARD_CONTENTS = #{BOARD_CONTENTS}
-         , nmPassword = #{nmPassword}
          , updateDate = NOW()
       WHERE 
          BOARD_NO = #{BOARD_NO}

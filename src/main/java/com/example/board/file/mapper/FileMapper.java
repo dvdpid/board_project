@@ -12,5 +12,7 @@ public interface FileMapper {
 	int insertFile(List<FileDto> attachList);
 
 	List<FileDto> fList(int bNo);
+
+	int deleteFile(int fNo);
 	
 }

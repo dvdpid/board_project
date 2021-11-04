@@ -16,7 +16,9 @@ let main = () => {
 //	$("#logout").on("click", function() {
 //		location.href="/user/logout.do"
 //	});
+	$("#mypage").on("click", function() {
+		location.href="/user/mypage.do";
+	});
 }
 
 main();
-

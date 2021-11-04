@@ -18,28 +18,43 @@
             <input id="nowPage" type="hidden" value="${nowPage}">
             
         </div>
+        			<!-- title 영역 -->
                     <div class="form-group">
                         <label class="col-md-12" for="txtTitle">제목</label>
                         <div class="col-md-12">
                             <input type="text" id="txtTitle" name="title" value="${b.BOARD_TITLE}" class="form-control input-md"><!--required : 공백입력시 경고-->
                         </div>
                     </div>
-                   <c:if test="${b.USER_NO==''}">
-                    <div class="form-group">
-                        <label class="col-md-12" for="txtTitle">비밀번호</label>
-                        <div class="col-md-12">
-                            <input id="txtPwd" name="password" type="password" placeholder="비밀번호를 입력하세요.(최대 12글자)" style="width: 300px;" maxlength="12" style="width: 200px;" class="form-control input-md", autofocus required><!--required : 공백입력시 경고-->
-                        </div>
-                    </div>
-                    </c:if>
+                    
+                    <!-- 내용 영역 -->
                     <div class="form-group">
                         <label class="col-md-12" for="txtPost">내용</label>
                         <div class="col-md-12">
                             <textarea class="form-control" id="txtPost" maxlength="1000" name="content" style="height:260px;" required>${b.BOARD_CONTENTS}</textarea>
                         </div>
                     </div>
+                    <br>
+                    <!-- 파일 리스트 영역 -->
+                    <c:if test="${!empty fList}">
+	                  <div class="form-group">
+	                  	<label class="col-md-12">첨부파일 목록</label>
+							<c:forEach var="f" items="${fList}">
+									<label class="col-md-12" id="fileList${f.file_No}"><a>${f.origin_Name} &nbsp;</a> <button id="deleteBtn${f.file_No}">X</button> </label>
+							</c:forEach>
+		              </div>
+		             </c:if>
+		              <!-- 이미지 추가 삽입 -->
+		             <div class="form-group">
+			             <form id="insertFiles" action="insertFile.do" method="post" enctype="multipart/form-data">
+	                     <input type="hidden" id="board_No" name="board_No" value="${b.BOARD_NO}">
+							<div class="form-group">
+								<input type="file" id="uploadFiles" name="files" multiple="multiple" accept=".png, .jpg, .jpeg" >
+		                    </div>
+	                     </form>
+                     </div>
+                    
                     <!-- Button -->
-                    <c:if test="${loginUser.USER_NO eq b.USER_NO}">
+                    <c:if test="${!empty b.USER_NO}">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
@@ -48,7 +63,7 @@
                         </div>
                  	</div>
                   	</c:if>
-                  	<c:if test="${b.USER_NO==''}">
+                  <c:if test="${empty b.USER_NO}">
                     <div class="form-group">
                         <label class="col-md-12 control-label" for="singlebutton"></label>
                         <div class="col-md-12">
@@ -57,6 +72,9 @@
                         </div>
                  	</div>
                   </c:if>
+                  
+                  
+                  
     </div>
      <script type="text/javascript" src="/js/board/boardUpdate.js"></script>
     	
