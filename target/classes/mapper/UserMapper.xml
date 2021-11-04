@@ -51,7 +51,49 @@
 			update_date,
 			delete_yn
 		from userinfo
-		where user_no = #{USER_NO} and delete_yn = 'N'
+		where user_no = #{uNo} and delete_yn = 'N'
 	</select>
+	
+	<select id="selectPwd" resultType="String">
+		select
+			USER_PWD
+		from
+			userinfo
+		where USER_NO = #{USER_NO} and delete_yn = 'N'
+	</select>
+	
+	<!-- 유저 비밀번호 업데이트 -->
+	<update id="pwdUpdate">
+	  UPDATE
+         userinfo
+      SET
+         user_pwd = #{USER_PWD},
+          update_date = now()
+      WHERE 
+         user_no = #{USER_NO}
+	</update>
+	
+	<!-- 유저정보 업데이트 -->
+	<update id="userUpdate">
+	  UPDATE
+         userinfo
+      SET
+         user_phone = #{USER_PHONE},
+         user_nickname = #{USER_NICKNAME},
+         update_date = now()
+      WHERE 
+         user_no = #{USER_NO}
+	</update>
+	
+	<!-- 유저 회원 탈퇴 -->
+	<update id="deleteUser">
+	  UPDATE
+         userinfo
+      SET
+         DELETE_YN = 'Y',
+         DELETE_DATE = NOW()
+      WHERE 
+         user_no = #{uNo}
+	</update>
 	
 </mapper>

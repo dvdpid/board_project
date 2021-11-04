@@ -17,4 +17,12 @@ public interface UserMapper {
 	int checkNickname(String nickname);
 
 	UserInfoDto selectUser(int uNo);
+
+	String selectPwd(int USER_NO);
+
+	int pwdUpdate(UserInfoDto u);
+
+	int userUpdate(UserInfoDto u);
+
+	int deleteUser(int uNo);
 }

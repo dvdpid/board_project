@@ -231,7 +231,7 @@
 	<script src="js/bootstrap/bootstrap.js"></script>
 	<script src="js/bootbox.js"></script>
 	
-		<script type="text/javascript" src="/js/board/boardDetail.js"></script>
-		<script type="text/javascript" src="/js/nav/nav.js"></script>
+	<script type="text/javascript" src="/js/board/boardDetail.js"></script>
+	<script type="text/javascript" src="/js/nav/nav.js"></script>
 </body>
 </html>

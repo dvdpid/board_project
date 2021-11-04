@@ -5,13 +5,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.board.board.controller.BoardRestController;
 import com.example.board.user.dto.UserInfoDto;
 import com.example.board.user.dto.UserLogin;
 import com.example.board.user.mapper.UserMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -61,6 +63,44 @@ public class UserService {
 
 	public UserInfoDto selectUser(int uNo) {
 		return userMapper.selectUser(uNo);
+	}
+
+
+	public boolean userPwdCheck(int USER_NO, String pwd) {
+		
+		// 유저 번호에 담겨있는 암호화된 password값 가져오기
+		String chkPwd = userMapper.selectPwd(USER_NO);
+		
+		log.info(pwd);
+		
+		if(chkPwd == null) {
+			return false;
+		}
+		if(passwordEncoder.matches(pwd, chkPwd)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	public int pwdUpdate(UserInfoDto u) {
+		
+		// 비밀번호 암호화
+		String encodePwd = passwordEncoder.encode(u.getUSER_PWD());
+		u.setUSER_PWD(encodePwd);
+		
+		return userMapper.pwdUpdate(u);
+	}
+
+
+	public int userUpdate(UserInfoDto u) {
+		return userMapper.userUpdate(u);
+	}
+
+
+	public int deleteUser(int uNo) {
+		return userMapper.deleteUser(uNo);
 	}
 	
 }

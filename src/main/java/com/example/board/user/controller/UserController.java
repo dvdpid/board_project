@@ -31,7 +31,6 @@ public class UserController {
 	
 	private final HttpSession session;
 	private final UserService userService;
-	private UserInfoDto userInfoDto = new UserInfoDto();
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	
@@ -125,16 +124,117 @@ public class UserController {
 //	
 	@GetMapping("/mypage.do")
 	public String mypageForm(Model m) throws Exception {
-		// 마이페이지 현재 계정 정보 받아오기
-			int uNo = ((UserInfoDto)session.getAttribute("loginUser")).getUSER_NO();
-			
-			UserInfoDto userInfoDto = userService.selectUser(uNo);
-			
-			m.addAttribute("u",userInfoDto);
-			
-			return "user/mypage";
-				
 		
+		int uNo = ((UserInfoDto)session.getAttribute("loginUser")).getUSER_NO();
+		UserInfoDto u = new UserInfoDto();
+		u = userService.selectUser(uNo);  
+		
+		log.info("유저정보" + u);
+		
+		m.addAttribute("loginUser",u);
+		m.addAttribute("u", u);
+		
+		return "user/mypage";
+	}
+	
+	@GetMapping("/pwdPage.do")
+	public String pwdPage() {
+		return "user/changePwd";
+	}
+	
+	// 마이페이지 비밀번호 체크
+	@PostMapping("/userPwdCheck.bo")
+	@ResponseBody
+	public boolean userPwdCheck(@RequestParam("USER_NO") int USER_NO,
+								@RequestParam("pwd") String pwd) throws Exception {
+		try {
+			boolean result = userService.userPwdCheck(USER_NO, pwd);
+			if(result) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return false;
+		}
+	}
+	
+	// 비밀번호 변경페이지 현재 비밀번호 체크
+	@GetMapping("nowPwdCheck.bo")
+	@ResponseBody
+	public boolean nowPwdCheck(@RequestParam("USER_NO") int USER_NO,
+			@RequestParam("pwd") String pwd) throws Exception {
+		
+		try {
+			boolean result = userService.userPwdCheck(USER_NO, pwd);
+			if(result) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return false;
+		}
 		
 	}
+	
+	// 비밀번호 변경
+	@PostMapping("pwdUpdate.do")
+	@ResponseBody
+	public int pwdUpdate(UserInfoDto u) throws Exception {
+		
+		try {
+			int result = userService.pwdUpdate(u);
+			return result;
+			
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return 0;
+		}
+	}
+	
+	// 회원정보 수정페이지로 이동
+	@GetMapping("modifyPage.do")
+	public String modifyPage() throws Exception {
+		return "user/updateUser";
+	}
+	// 회원정보 수정
+	@PostMapping("userUpdate.bo")
+	@ResponseBody
+	public int userUpdate(UserInfoDto u) throws Exception {
+		
+		try {
+			int result = userService.userUpdate(u); 
+			return result;
+			
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return 0;
+		}
+	}
+	// 회원 탈퇴
+	@PostMapping("deleteUser.do")
+	public String deleteUser(@RequestParam("USER_NO") int uNo, Model m) throws Exception {
+		
+		// 유저 회원 탈퇴
+		try {
+			int result = userService.deleteUser(uNo);
+			log.info("회원 탈퇴 값 : "+result);
+			if(result > 0) {
+				// 회원 탈퇴 성공하면 세션 초기화
+				m.addAttribute("loginUser", null);
+				session.invalidate();
+				return "redirect:/";
+			} else {
+				return "error/errorpage";
+			}
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return "error/errorpage";
+		}
+		
+	}
+	
 }

@@ -30,8 +30,8 @@ public class FileService {
 	/** 파일경로 
 	 * C:\Users\dvdpi\DEV\board\src\main\resources
 	 * */
-	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", "static", "images", today).toString();
-//	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project3", "src", "main", "resources", "static", today).toString();
+//	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", "static", "images", today).toString();
+	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project4", "src", "main", "resources", "static", "images",today).toString();
 //	
 	
 	

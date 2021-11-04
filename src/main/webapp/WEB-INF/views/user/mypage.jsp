@@ -17,33 +17,49 @@
    <c:import url="../nav/nav.jsp"></c:import>
    
 	<div class="container">
-	<table id="tbl" border="1px;">
-		<tr>
-			<th colspan="2">개인정보</th>
-		</tr>
-		<tr>
-			<td class="lTd">ID</td>
-			<td>${u.USER_ID}</td>
-		</tr>
-		<tr>
-			<td class="lTd">닉네임</td>
-			<td>${u.USER_NICKNAME}</td>
-		</tr>
-		<tr>
-			<td class="lTd">휴대전화</td>
-			<c:if test="${empty u.USER_PHONE}">
-				<td class="lTd">비어있음</td>
-			</c:if>
-			<c:if test="${!empty u.USER_PHONE}">
-				<td class="lTd">${u.USER_PHONE}</td>
-			</c:if>
-		</tr>
-	</table>
-	<button>수정</button>
-	<button>탈퇴</button>
+			<table id="table" class="table table-striped" style="text-align: center; margin-top:30px; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;">정보</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 20%;">회원 ID</td>
+						<td style="width: 20%;">${u.USER_ID}</td>
+					</tr>
+					<tr>
+						<td style="width: 20%;">닉네임</td>
+						<td style="width: 20%;">${u.USER_NICKNAME}</td>
+					</tr>
+					<tr>
+						<td style="width: 20%;">휴대전화</td>
+						<td style="width: 20%;">${u.USER_PHONE}</td>
+					</tr>
+					<tr>
+						<td style="width: 20%;">비밀번호</td>
+						<td style="width: 20%;"><input id="pwd" type="password"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<span class="sp">비밀번호 수정 </span><input type="radio" name="modify" value="0" class="chk" checked="checked">
+							<span class="sp">개인정보 수정 </span><input type="radio" name="modify" value="1" class="chk">
+							<span class="sp">회원 탈퇴 </span><input type="radio" name="modify" value="2" class="chk">
+							<input type="submit" id="btn" value="확인">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<form method="post" id="deleteUser" action="deleteUser.do">
+				<input type="hidden" id="uNo" name="USER_NO" value="${u.USER_NO}">
+			</form>
+			
+			
+		
 		
 	</div>
 	<c:import url="../common/footer.jsp"></c:import>
-	  <script type="text/javascript" src="/js/nav/nav.js" ></script>
+	 <script type="text/javascript" src="/js/nav/nav.js" ></script>
+	 <script type="text/javascript" src="/js/user/mypage.js"></script>
 </body>
 </html>
