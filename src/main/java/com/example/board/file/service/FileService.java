@@ -27,12 +27,28 @@ public class FileService {
 	/** 오늘 날짜를 계산해서 파일경로에 넣어주기 위해*/
 	private final String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
 
-	/** 파일경로 
+	/** 파일경로 설정을 위한 값
 	 * C:\Users\dvdpi\DEV\board\src\main\resources
+	 * C:\Users\dvdpi\git\board_project2\src\main\resources\static\images
 	 * */
 //	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "DEV", "board", "src", "main", "resources", "static", "images", today).toString();
-	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project4", "src", "main", "resources", "static", "images",today).toString();
-//	
+//	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project4", "src", "main", "resources", "static", "images",today).toString();
+	private final String uploadPath = Paths.get("C:", "Users", "dvdpi", "git", "board_project5", "src", "main", "resources", "static", "images", today).toString();
+	
+	/**
+	 * 이클립스는 로컬에서 실행되는 경로(배포경로)와 업로드 경로(workspace)가 다르기 때문에 ​이미지를 바로 찾지 못한다.
+	 * 
+	 * */
+	
+	
+	
+	/**
+	 * 원본 파일명과 저장 파일명을 구분하는 이유
+	 * os에 따라 저장되지 않거나 파일명이 바뀌는 이슈가 발생.
+	 * 윈도우의 경우, 동일한 파일 이름으로 저장할 때 파일 이름 뒤에 숫자가 붙음
+	 * ex) plateer.jpg , plateer(1).jpg
+	 * 이와 같이 번호가 붙은 상태로 저장되면 파일을 못찾기때문에 구분한다.
+	 */
 	
 	
 	/**
@@ -44,7 +60,7 @@ public class FileService {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 	
-	
+	/** 파일정보 insert*/
 	public int insertFile(List<MultipartFile> fileList, int board_No) {
 		/** 파일 정보를 담을 빈 리스트 */
 		List<FileDto> attachList = new ArrayList<>();
@@ -64,7 +80,7 @@ public class FileService {
 				/** 로컬에 저장할 파일명 (랜덤 문자열 + 확장자) */
 				final String saveName = getRandomString() + "." + extension;
 				
-				/** 파일경로에 파일 생성 */
+				/** 지정한 파일경로에 파일 생성 */
 				File target = new File(uploadPath, saveName);
 				file.transferTo(target);
 				
@@ -76,6 +92,7 @@ public class FileService {
 				f.setFile_Path("images/"+today);
 				f.setFile_Size(file.getSize());
 				
+				/** 빈 리스트에 값 넣어주기*/
 				attachList.add(f);
 				
 			} catch (Exception e) {
@@ -94,8 +111,11 @@ public class FileService {
 	public List<FileDto> fList(int bNo) {
 		return fileMapper.fList(bNo);
 	}
-
-
+	
+	
+	/** 파일 삭제 (update)
+	 * 가져온 file_no 로 해당 파일 delete_yn = 'Y' 로 변경
+	 * */
 	public int deleteFile(int fNo) {
 		return fileMapper.deleteFile(fNo);
 	}

@@ -25,6 +25,9 @@ import com.example.board.user.dto.UserInfoDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Slf4j
 @Controller
@@ -37,6 +40,8 @@ public class BoardController {
 	private final CommentService commentService;
 	private final FileService fileService;
 	private final HttpSession session;
+//	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 게시판 리스트
 	@RequestMapping("/")
 	public String boardList(Model model
@@ -66,9 +71,17 @@ public class BoardController {
 			pageDto.setSearchType(searchType);
 			pageDto.setKeyword(keyword);
 			
-			
 			model.addAttribute("paging", pageDto);
 			model.addAttribute("bList", bList);
+			
+			logger.trace("trace 출력");
+			logger.debug("debug 출력");
+			logger.info("info 출력");
+			logger.warn("warn 출력");
+			logger.error("error 출력");
+			
+			
+			
 			
 			
 			return "/board/board";
